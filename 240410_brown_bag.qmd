@@ -1,0 +1,18 @@
+---
+title: "240410 brown bag"
+format: html
+author: "rebecca"
+---
+
+# Commit - Pull - Push
+
+## Connecting GitHub to RStudio for Reproducible Research
+
+**Note:** Brown Bag attendees will learn more from my presentation if they 1) bring their laptop or follow along on Zoom, 2) have [RStudio](https://posit.co/download/rstudio-desktop/) loaded already to their machine, and 3) have a [GitHub](https://github.com/) account already.
+
+### Make sure that your working directory is set in RStudio
+
+```{r}
+getwd()
+#setwd("X:/YOUR PREFERED WORKING DIRECTORY")
+```
