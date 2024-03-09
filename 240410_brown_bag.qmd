@@ -13,6 +13,16 @@ author: "rebecca"
 ### Make sure that your working directory is set in RStudio
 
 ```{r}
+#| echo: false
 getwd()
 #setwd("X:/YOUR PREFERED WORKING DIRECTORY")
 ```
+
+
+Git resources
+Pro Git Book
+Happy Git and GitHub for the useR
+GitHub Documentation
+Learn Git Branching is an interactive tool to learn Git on the command line
+Software Carpentry Version Control with Git
+Bitbucket’s tutorials on Git Workflows
