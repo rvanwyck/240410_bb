@@ -314,9 +314,187 @@ Congrats! Now you’ve set up your authentication, and you should be able to wor
 
 > **Note:** For better security and long term use, we recommend taking the extra steps to set up SSH keys (check out Chapter 10 Set up Keys for SSH in the book *Happy Git and GitHub for the useR*).
 
-# Clone a Repository from GitHub to R Studio
+> **Git configuration to surpress warning messages**
+>
+> Git version 2.27 includes a new feature that allows users to specify the default method for integrating changes from a remote repository into a local repository, without receiving a warning (this warning is informative, but can get annoying). To suppress this warning *for this repository only* we need to configure Git by running this line of code in the Terminal:
+>
+> ```         
+> git config pull.rebase false
+> ```
+>
+> `pull.rebase false` is a default strategy for pulling where Git will first try to auto-merge the files. If auto-merging is not possible, it will indicate a merge conflict.
+
+# **Collaborating with a trusted colleague without conflicts**
+
+We start our collaboration by giving a trusted colleague access to our repository on GitHub. In this example, we define the **Owner as the individual who owns the repository**, and the **Collaborator as the person whom the Owner chooses to give permission to make changes to their repository**.
+
+The Collaborator will make changes to the repository and then `push` those changes to the shared repository on GitHub. The Owner will then use `pull` to retrieve the changes without encountering any conflicts. *This is the most ideal workflow.*
+
+The instructors will demonstrate this process in the next section.
+
+### **Step 0: Owner adds a Collaborator to their repository on GitHub**
+
+The Owner must change the settings of the remote repository and give the Collaborator access to the repository by inviting them as a collaborator. Once the Collaborator accepts the owner’s invitation, they will have push access to the repository – meaning they can contribute their own changes/commits to the Owner’s repository.
+
+To do this, the owner will navigate to their remote repository on GitHub, then choose **Settings** \> **Collaborators** \> **Add people**, to send an email invitation. The invitation will show as “Pending” until accepted.
+
+### **Step 1: Collaborator clones the remote repository**
+
+In order to contribute, the Collaborator must **clone** the repository from the **Owner’s** GitHub account (*Note: as a Collaborator, you won’t see the repository appear under your profile’s Repositories page*). To do this, the Collaborator should navigate to the Owner’s repository on GitHub, then copy the clone URL. In RStudio, the Collaborator will create a new project from version control by pasting this clone URL into the appropriate dialog box.
+
+# **`clone` your repository and use Git locally in RStudio**
 
 Let's bring a copy of this remote repository down to our local computer (aka **clone** this repository) so that we can work comfortably in RStudio.
+
+> **An important distinction**
+>
+> We refer to the **remote copy** of the repository that is on GitHub as the **origin repository** (the one that we cloned from), and the copy on our local computer as the **local repository**.
+
+Start by clicking the green **Code** button (top right of your file listing) and copying the URL to your clipboard (this URL represents the repository location):
+
+![](240410_brown_bag_files/github-test-clone-url.png){width="646"}
+
+> **Setup**
+>
+> -   Click **File** \> **New Project**
+>
+> -   Select **Version Control** and paste the remote repository URL (which should be copied to your clipboard) in the **Repository ULR** field
+>
+> -   Press **Tab**, which will auto-fill the **Project directory name** field with the same name as that of your remote repo – while you can name the local copy of the repository anything, it’s typical (and highly recommended) to use the same name as the GitHub repository to maintain the correspondence
+>
+>     ![](240410_brown_bag_files/rstudio-clone-repo-sam.png)
+
+Once you click **Create Project**, a new RStudio window will open with all of the files from the remote repository copied locally. Depending on how your version of RStudio is configured, the location and size of the panes may differ, but they should all be present – you should see a **Git** tab, as well as the **Files** tab, where you can view all of the files copied from the remote repo to this local repo.
+
+> **Last thing, some Git configuration to surpress warning messages**
+>
+> Git version 2.27 includes a new feature that allows users to specify the default method for integrating changes from a remote repository into a local repository, without receiving a warning (this warning is informative, but can get annoying). To suppress this warning *for this repository only* we need to configure Git by running this line of code in the Terminal:
+>
+> ```         
+> git config pull.rebase false
+> ```
+>
+> `pull.rebase false` is a default strategy for pulling where Git will first try to auto-merge the files. If auto-merging is not possible, it will indicate a merge conflict.
+>
+> **`.gitignore` files allow you to specify which files/folders you *don’t* want Git to track**
+>
+> A `.gitignore` file is automatically created in the root directory of your project when you initialize it as a Git repository. You’ll notice that there are already some R / R Project-specific files that have been added by default.
+>
+> **Why is this useful?** For many reasons, but possibly the greatest use-case is adding large files (GitHub has a file size limit of 2 GB) or files with sensitive information (e.g. keys, tokens) that you don’t want to accidentally push to GitHub.
+>
+> **How do I do this?** Let’s say I create a file with sensitive information that I don’t want to push to GitHub. I can add a line to my `.gitignore` file:
+>
+> ```         
+> # added by default when I initalized my RProj as a Git Repository .Rproj.user .Rhistory .Rdata .httr-oauth .DS_Store .quarto  # add file so that it doesn't get pushed to the remote repo (on GitHub);  contains_sensitive_info.R
+> ```
+>
+> If this file is currently untracked by Git, it should appear in my **Git** tab. Once I add it to the `.gitignore` *and* save the modified `.gitignore` file, you should see `contains_sensitive_info.R` disappear from the **Git** tab, and a modified `.gitignore` (denoted by a blue **M**) appear. Stage/commit/push this modified `.gitignore` file.
+
+**Why do I need to add and commit files *before* pulling?**
+
+> Remember, `git pull` is a combination of `git fetch`ing remote changes to your local repo and `git merge`ing those changes from your local repo into your local working file(s).
+>
+> The **merge** part of `git pull` will fail if you have uncommitted changes in your local working file(s) to avoid any potential overwriting of your own changes. Because of this, you should always, add/commit *then* pull, *and finally* push.
+
+## **A Note on Advanced Collaboration Techniques**
+
+There are many Git and GitHub collaboration techniques, some more advanced than others. We won’t be covering advanced strategies in this course. But here is a table for your reference on a few popular Git collaboration workflow strategies and tools.
+
++------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Collaboration Technique                                                            | Benefits                                                                                                                                | When to Use                                                                                                                              | When Not to Use                                                                                                                         |
++====================================================================================+=========================================================================================================================================+==========================================================================================================================================+=========================================================================================================================================+
+| Branch Management Strategies                                                       | 1\. Enables parallel development and experimentation\                                                                                   | When working on larger projects with multiple features or bug fixes simultaneously.\                                                     | When working on small projects with a single developer or limited codebase.\                                                            |
+|                                                                                    | 2. Facilitates isolation of features or bug fixes\                                                                                      | When you want to maintain a stable main branch while developing new features or resolving issues on separate branches.\                  | When the project scope is simple and doesn’t require extensive branch management.\                                                      |
+|                                                                                    | 3. Provides flexibility and control over project workflows                                                                              | When collaborating with teammates on different aspects of a project and later integrating their changes.                                 | When there is no need to isolate features or bug fixes.                                                                                 |
++------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Code Review Practices                                                              | 1\. Enhances code quality and correctness through feedback\                                                                             | When collaborating on a codebase with team members to ensure code quality and maintain best practices.\                                  | When working on personal projects or small codebases with no collaboration involved.\                                                   |
+|                                                                                    | 2. Promotes knowledge sharing and learning within the team\                                                                             | When you want to receive feedback and suggestions on your code to improve its readability, efficiency, or functionality.\                | When time constraints or project size make it impractical to conduct code reviews.\                                                     |
+|                                                                                    | 3. Helps identify bugs, improve performance, and ensure adherence to coding standards                                                   | When working on critical or complex code that requires an extra layer of scrutiny before merging it into the main branch.                | When the codebase is less critical or has low complexity.                                                                               |
++------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Forking                                                                            | 1\. Enables independent experimentation and development\                                                                                | When you want to contribute to a project without having direct write access to the original repository.\                                 | When collaborating on a project with direct write access to the original repository.\                                                   |
+|                                                                                    | 2. Provides a way to contribute to a project without direct access\                                                                     | When you want to work on an independent variation or extension of an existing project.\                                                  | When the project does not allow external contributions or forking.\                                                                     |
+|                                                                                    | 3. Allows for creating separate, standalone copies of a repository                                                                      | When experimenting with changes or modifications to a project while keeping the original repository intact.                              | When the project size or complexity doesn’t justify the need for independent variations.                                                |
++------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Pull Requests                                                                      | 1\. Facilitates code review and discussion\                                                                                             | When working on a shared repository with a team and wanting to contribute changes in a controlled and collaborative manner.\             | When working on personal projects or individual coding tasks without the need for collaboration.\                                       |
+|                                                                                    | 2. Allows for collaboration and feedback from team members\                                                                             | When you want to propose changes to a project managed by others and seek review and approval before merging them into the main codebase. | When immediate changes or fixes are required without review processes.\                                                                 |
+|                                                                                    | 3. Enables better organization and tracking of proposed changes                                                                         |                                                                                                                                          | When working on projects with a small team or single developer with direct write access to the repository.                              |
++------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+
+The “When Not to Use” column provides insights into situations where it *may* be less appropriate / unnecessary to use each collaboration technique, helping you make informed decisions based on the specific context and requirements of your project.
+
+These techniques provide different benefits and are used in various collaboration scenarios, depending on the project’s needs and team dynamics.
+
+## **Merge conflicts**
+
+**Merge conflicts** occur when both collaborators make conflicting changes to the same file. Resolving merge conflicts involves identifying the root of the problem and restoring the project to a normal state. Good communication, discussing file sections to work on, and avoiding overlaps can help prevent merge conflicts. However, if conflicts do arise, Git warns about potential issues and ensures that changes from different collaborators based on the same file version are not overwritten. To resolve conflicts, you need to explicitly specify whose changes should be used for each conflicting line in the file.
+
+In this image, we see collaborators `mbjones` and `metamattj` have both made changes to the same line in the same `README.md` file. This is causing a merge conflict because Git doesn’t know whose changes came first. To resolve it, we need to tell Git whose changes to keep for that line, and whose changes to discard.
+
+![](240410_brown_bag_files/git-conflict-00-lines-changed.png)
+
+### **Common ways to resolve a merge conflict**
+
+**1. Abort, abort, abort…**
+
+Sometimes you just made a mistake. When you get a merge conflict, the repository is placed in a “Merging” state until you resolve it. There’s a Terminal command to abort doing the merge altogether:
+
+```         
+git merge --abort
+```
+
+Of course, after doing that you still haven’t synced with your Collaborator’s changes, so things are still unresolved. But at least your repository is now usable on your local machine.
+
+**2. Checkout**
+
+The simplest way to resolve a conflict, given that you know whose version of the file you want to keep, is to use the command line to tell Git to use either **your** changes (the person doing the `merge`), or **their** changes (the Collaborator).
+
+-   keep your Collaborator’s file: `git checkout --theirs conflicted_file.Rmd`
+
+-   keep your own file: `git checkout --ours conflicted_file.Rmd`
+
+Once you have run that command, then run `add` (staging), `commit`, `pull`, and `push` the changes as normal.
+
+**3. Pull and edit the file**
+
+Option 2, above, requires the command line, however, we have a third option for resolving the merge conflict from RStudio. Using this approach will allow us to pick and choose some of our changes *and* some of our Collaborator’s changes by letting us manually edit and fix the conflicted file.
+
+When you `pull` a file with a conflict, Git will provide you with a warning modify the file so that it includes both your own changes and your Collaborator’s changes. The file will also appear in the **Git** tab with an orange `U` icon, which indicates that the file is `Unmerged` and therefore awaiting your help to resolve the conflict. It delimits these blocks of conflicted code with a series of less than and greater than signs, so they are easy to find:
+
+![](240410_brown_bag_files/rstudio-merge-conflict.png)
+
+In the above example, `<<<<<<< HEAD` marks the start of *your* changes. The `=======` delimiter separates your changes from your Collaborator’s conflicting changes. `>>>>>>>` mark the end of your Collaborator’s changes.
+
+To resolve the conflicts, simply find all of these blocks, and edit them so that the file looks how you want (either pick your lines, your Collaborator’s lines, some combination, or something altogether new), and save. Be sure you removed the delimiter lines that started with
+
+-   `<<<<<<<`
+
+-   `=======`
+
+-   `>>>>>>>`
+
+Once you have made those changes, you simply `add` (staging), `commit`, and `push` the files to resolve the conflict.Clone a Repository from GitHub to R Studio
+
+## **Best practices to avoid merge conflicts**
+
+Some basic rules of thumb can avoid the vast majority of merge conflicts, saving a lot of time and frustration. These are words our teams live by:
+
+-   Communicate often and set up effective communication channels
+
+-   Tell each other what you are working on
+
+-   Start your working session with a `pull`
+
+-   `Pull` immediately after you `commit` and before you `push`
+
+-   `Commit` often in small chunks (this helps you organize your work!)
+
+-   Make sure you and who you are collaborating with all **fully** understand the Git workflow you’re using (aka make sure you’re on the same page before you start)!
+
+A good workflow is encapsulated as follows:
+
+`Pull -> Edit -> Save -> Add (stage) -> Commit -> Pull -> (OPTIONAL) Fix any merge conflicts -> Push`
+
+It may take a bit of practice to get comfortable with navigating merge conflicts, but like any other technical skill, they’ll become less intimidating with time. With careful communication and a consistent workflow, conflicts can be largely avoided or resolved when they do occur.
 
 # Organizing an R Project
 
@@ -331,7 +509,7 @@ When starting a new research project, one of the first things I do is create an 
 
 Directory organization will vary from project to project, but the ultimate goal is to create a well-organized project that supports both reproducibility and collaboration.
 
-![](240410_brown_bag_files/rproj-basic-organization.png)
+![](240410_brown_bag_files/rproj-basic-organization.png){width="533"}
 
 # Set up a Quarto Document:
 
@@ -357,15 +535,21 @@ Notice how the grey **R code chunks** are surrounded by 3 back-ticks and `{r LAB
 
 The table below show some of the options available to customizing outputs ([Quarto.org](https://quarto.org/docs/computations/execution-options.html)).
 
-|               |                                                                                                                                             |
-|-------------------------|-----------------------------------------------|
-|               | Code chunk options                                                                                                                          |
-| Option        | Description                                                                                                                                 |
-| `#| eval:`    | Evaluate the code chunk (if `false`, just echos the code into the output).                                                                  |
-| `#| echo:`    | Include the source code in output                                                                                                           |
-| `#| warning:` | Include warnings in the output.                                                                                                             |
-| `#| error:`   | Include warnings in the output.                                                                                                             |
-| `#| include:` | Catch all for preventing any output (code or results) from being included (e.g.`include: false` suppresses all output from the code block). |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+|                       | Code chunk options                                                                                                                          |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Option                | Description                                                                                                                                 |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| eval:`            | Evaluate the code chunk (if `false`, just echos the code into the output).                                                                  |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| echo:`            | Include the source code in output                                                                                                           |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| warning:`         | Include warnings in the output.                                                                                                             |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| error:`           | Include warnings in the output.                                                                                                             |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| include:`         | Catch all for preventing any output (code or results) from being included (e.g.`include: false` suppresses all output from the code block). |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 
 Note that you can also combine these options by adding more than one to a code chunk.
 
@@ -406,3 +590,17 @@ It is generally good practice to include all of your `library()` calls in a sing
 -   [Quarto Gallery:](https://quarto.org/docs/gallery/) Example of different outputs created using Quarto
 
 -   [Hello Quarto: share, collaborate, teach, reimagine](https://openscapes.org/blog/2022-08-10-quarto-keynote/). A talk by Julia Stewart Lowndes and Mine Cetinkaya-Runde.
+
+## **Git Resources**
+
+-   [Pro Git Book](https://git-scm.com/book/en/v2)
+
+-   [Happy Git and GitHub for the useR](https://happygitwithr.com/)
+
+-   [GitHub Documentation](https://docs.github.com/en/get-started/quickstart/set-up-git)
+
+-   [Learn Git Branching](https://learngitbranching.js.org/) is an interactive tool to learn Git on the command line
+
+-   [Software Carpentry Version Control with Git](https://swcarpentry.github.io/git-novice/)
+
+-   Bitbucket’s tutorials on [Git Workflows](https://www.atlassian.com/git/tutorials/comparing-workflows)
