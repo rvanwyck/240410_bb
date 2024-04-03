@@ -2,6 +2,7 @@
 title: "240410 Brown Bag" 
 format: html 
 author: "Rebecca" 
+bibliography: references.bib
 ---
 
 # Commit - Pull - Push
@@ -26,7 +27,13 @@ author: "Rebecca"
 
 > The information in this presentation was shamelessly taken from the February, 2024 materials from the Arctic Data Center training; [Reproducible Approaches to Arctic Research Using R](https://learning.nceas.ucsb.edu/2024-02-arctic/)
 >
-> -   Jeanette Clark, Angie Garcia, Matthew B. Jones, Justin Kadi, Maggie Klope, Camila Vargas Poulsen (2024), Reproducible Approaches to Arctic Research Using R. Arctic Data Center & NCEAS Learning Hub. URL <https://learning.nceas.ucsb.edu/2024-02-arctic>.
+> -   Jeanette Clark, Angie Garcia, Matthew B. Jones, Justin Kadi, Maggie Klope, Camila Vargas Poulsen (2024), Reproducible Approaches to Arctic Research Using R. Arctic Data Center. URL <https://learning.nceas.ucsb.edu/2024-02-arctic>.
+>
+> You may also find these materials helpful for your work:
+>
+> -   Angie Garcia, Matthew B. Jones, Justin Kadi, Maggie Klope, Camila Vargas Poulsen (2024), Fundamentals in Data Management for Qualitative and Quantitative Arctic Research. Arctic Data Center. URL <https://learning.nceas.ucsb.edu/2024-01-arctic>.
+>
+> -   S. Jeanette Clark, Matthew B. Jones, Samantha Csik, Carmen Galaz García, Bryce Mecum, Natasha Haycock-Chavez, Daphne Virlar-Knight, Juliet Cohen, Anna Liljedahl. 2023. Scalable and Computationally Reproducible Approaches to Arctic Research. Arctic Data Center. [doi:10.18739/A2QF8JM2V](https://doi.org/10.18739/A2QF8JM2V)
 
 ------------------------------------------------------------------------
 
@@ -120,7 +127,7 @@ Computational provenance refers to the origin and processing history of data inc
 
 When we put these all together with formal documentation, we create a **computational workflow** that captures all of the steps from initial data cleaning and integration, through analysis, modeling, and visualization. In other words, **computational provenance is a formalized description of a workflow from the origin of the data to it’s final outcome**.
 
-Here’s an example of a computational workflow from Mark Carls: [Mark Carls. Analysis of hydrocarbons following the Exxon Valdez oil spill, Gulf of Alaska, 1989 - 2014. Gulf of Alaska Data Portal. urn:uuid:3249ada0-afe3-4dd6-875e-0f7928a4c171.](https://search.dataone.org/view/urn%3Auuid%3A3249ada0-afe3-4dd6-875e-0f7928a4c171), that represents a three step workflow comprising four source data files and two output visualizations.
+# NOW Let's dive into Git and GitHub:
 
 ------------------------------------------------------------------------
 
