@@ -22,10 +22,6 @@ YAML Is the document’s metadata which sets guidelines on how your want the out
 
 -   Specific parameters for your report (eg: just used a subset of the data).
 
-**Best Practice**
-
-It is generally good practice to include all of your `library()` calls in a single, dedicated R chunk near the top of your document. This lets collaborators know what packages they might need to install before they start running your code.
-
 # What is Reproducible Research?
 
 Reproducible analysis allow you to automatize how the figures and the statistics in your analysis are generated. This process also helps your collaborators, your readers and your future self to follow your code trail the leads to the original data, increasing the transparency of your science.
@@ -73,6 +69,8 @@ The version control system we’ll be diving into is Git, the most widely used m
 > ## Install Git
 >
 > If Git is not installed, you'll need to download and install it. You can download Git from [git-scm.com](https://git-scm.com). During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.
+>
+> Are you getting any errors? [Setting the Path to Git Manually](~/training_rkvanwyck/240410_bb/240410_brown_bag.html)
 
 ### **What *exactly* are Git and GitHub?**
 
@@ -153,77 +151,7 @@ The processes described in the above sections (i.e. making changes to local wor
 >
 > 8.  **Reference relevant issues**: If the commit is related to a specific issue or task, include a reference to it. For example, you can mention the issue number or use keywords like “Fixes,” “Closes,” or “Resolves” followed by the issue number.
 
-# Add Git to PATH Manually
-
-If Git is installed but not recognized, you might need to add Git to your system's PATH manually. The PATH is an environment variable that lists the directories the operating system should look in for executable files.
-
-# Git Installation Guide
-
-## For Windows
-
-### Verify Git Installation
-
-Make sure Git is installed on your computer. You can download it from [git-scm.com](https://git-scm.com).
-
-### Locate Git Installation Path
-
-Find where Git is installed. The default path is usually `C:\\Program Files\\Git`.
-
-### Edit System PATH
-
--   Open the Start Search, type in "env", and choose "Edit the system environment variables".
--   In the System Properties window, click on the "Environment Variables..." button.
--   In the Environment Variables window, under "System variables", find and select the "Path" variable, then click "Edit".
--   In the Edit Environment Variable window, click "New" and add the Git installation path followed by `\\bin`. For example, `C:\\Program Files\\Git\\bin`.
--   Click "OK" to close all windows and apply the changes.
-
-### Restart Your Computer
-
-For the changes to take effect, you might need to restart your computer.
-
-## For macOS/Linux
-
-### Check Git Installation
-
-Typically, Git is already installed on macOS and most Linux distributions. You can verify this by running `git --version` in the terminal.
-
-### Update PATH if Necessary
-
--   Open your terminal.
--   Edit your shell profile file (like `.bash_profile`, `.bashrc`, or `.zshrc`) using a text editor (e.g., `nano ~/.bash_profile`).
--   Add a line like `export PATH="/usr/local/bin:$PATH"` (adjust the path if Git is installed in a different location).
--   Save the file and run `source ~/.bash_profile` to apply the changes.
-
-### Verify the Change
-
-Reopen the terminal and type `git --version` to check if Git is now recognized.
-
-## Restart Terminal
-
-After installing Git or modifying the PATH, you may need to restart your terminal or command prompt for the changes to take effect.
-
-## Using Git
-
-Once Git is properly installed and recognized by your system, you should be able to run the `git config --global user.name "rvanwyck"` command without any issues. This command sets your username in the global Git configuration, which is used to identify you in your commits.
-
-### Make sure that your working directory is set in RStudio
-
-```{r} getwd()  ## If the result is not what you want reset your working directory ## setwd("X:/YOUR PREFERED WORKING DIRECTORY")}
-```
-
-If you're encountering an error when using **'usethis::create_package()'** in RStudioX, it could be due to several reasons. The **'create_package()'** function from the usethis package is designed to set up a new R package structure for you.
-
-**Package Installation:** Ensure that the **'usethis'** package is correctly installed. If not, you can install it using:
-
-```{r} ## install.packages("usethis")}
-```
-
-To configure your global options in Git, especially within the context of R package development, you can use the **'usethis'** package. The **'usethis'** package allows you to set personal defaults for various settings. For example, you can specify defaults for your role as a package maintainer or for your preferred license in the **'.Rprofile'** file.
-
-```{r} options(   usethis.description = list(     `Authors@R` = 'person("Jane", "Doe", email = "jane@example.com")'   ) )}
-```
-
-# Set Up Global Options in Git
+# Enough of the explanations: Set Up Global Options in Git
 
 Before using Git, you need to tell it who you are, also known as setting the global options. To do this, we will be setting the global options in the Terminal.
 
