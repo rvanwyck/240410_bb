@@ -52,15 +52,108 @@ There are many benefits to using a version control software including:
 
 The version control system we’ll be diving into is Git, the most widely used modern version control system in the world.
 
-# Checking and Installing Git
+#### With Git we can enhance our workflow:
 
-## Check if Git is Installed
+-   **Eliminate** the need for **cryptic filenames** and comments to track our work.
 
-First, ensure that Git is indeed installed on your computer. You can do this by trying to run `git --version` in your terminal or command prompt. If Git is installed, this command will return the version of Git you have installed.
+-   Provide **detailed descriptions of our changes** through commits, making it easier to understand the reasons behind code modifications.
 
-## Install Git
+-   Work on multiple **branches** simultaneously, allowing for parallel development, and optionally merge them together.
 
-If Git is not installed, you'll need to download and install it. You can download Git from [git-scm.com](https://git-scm.com). During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.
+-   Use commits to **access and even execute older versions** of our code.
+
+-   **Assign meaningful tags** to specific versions of our code.
+
+-   Additionally, Git offers a powerful distributed feature. **Multiple individuals can work on the same analysis concurrently** on their own computers, with the ability to merge everyone’s changes together.
+
+> # Checking and Installing Git
+>
+> ## Check if Git is Installed
+>
+> First, ensure that Git is indeed installed on your computer. You can do this by trying to run `git --version` in your terminal or command prompt. If Git is installed, this command will return the version of Git you have installed.
+>
+> ## Install Git
+>
+> If Git is not installed, you'll need to download and install it. You can download Git from [git-scm.com](https://git-scm.com). During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.
+
+### **What *exactly* are Git and GitHub?**
+
+![](240410_brown_bag_files/git-intro.png){width="417"}
+
+#### Git:
+
+-   an open-source distributed **version control** software
+
+-   designed to manage the versioning and tracking of source code files and project history
+
+-   **operates locally** on your computer, allowing you to create repositories, and track changes
+
+-   provides features such as committing changes, branching and merging code, reverting to previous versions, and managing project history
+
+-   works directly with the files on your computer and does not require a network connection to perform most operations
+
+-   primarily used through the command-line interface (CLI, e.g. Terminal), but also has various GUI tools available (e.g. RStudio IDE)
+
+    ![](240410_brown_bag_files/github-intro.png){width="428"}
+
+#### GitHub:
+
+-   **online platform** and service built around Git
+
+-   provides a **centralized hosting platform for Git repositories**
+
+-   allows us to store, manage, and collaborate on their Git repositories in the cloud
+
+-   offers additional features on top of Git, such as a web-based interface, issue tracking, project management tools, pull requests, code review, and collaboration features
+
+-   enables easy sharing of code with others, facilitating collaboration and contribution to open source projects
+
+-   provides a social aspect, allowing users to follow projects, star repositories, and discover new code
+
+### **Understanding how local working files, Git, and GitHub all work together**
+
+It can be a bit daunting to understand all the moving parts of the Git / GitHub life cycle (i.e. how file changes are tracked locally within repositories, then stored for safe-keeping and collaboration on remote repositories, then brought back down to a local machine(s) for continued development). It gets easier with practice, but we’ll explain (first in words, then with an illustration) at a high-level how things work:
+
+#### 6.2.3.1 What is the difference between a “normal” folder vs. a Git repository
+
+Whether you’re a Mac or a PC user, you’ll likely have created a folder at some point in time for organizing files. Let’s pretend that we create a folder, called `myFolder/`, and add two files: `myData.csv` and `myAnalysis.R`. The contents of this folder are not currently version controlled – meaning, for example, that if we make some changes to `myAnalysis.R` that don’t quite work out, we have no way of accessing or reverting back to a previous version of `myAnalysis.R` (without remembering/rewriting things, of course).
+
+Git allows you to turn any “normal” folder, like `myFolder/`, into a **Git repository** – you’ll often see/hear this referenced as “initializing a Git repository”. When you initialize a folder on your local computer as a Git repository, a hidden `.git/` folder is created *within* that folder (e.g. `myFolder/.git/`) – this `.git/` folder *is* the **Git repository**. As you use Git commands to capture versions or “snapshots” of your work, those versions (and their associated metadata) get stored within the `.git/` folder. This allows you to access and/or recover any previous versions of your work. If you delete `.git/`, you delete your project’s history.
+
+Here is our example folder / Git repository represented visually:
+
+![](240410_brown_bag_files/git-repo.png)
+
+#### My versioned work is on my local computer, but I want to send it to GitHub. How?
+
+The last step is synchronizing the changes made to our local repository with a remote repository (oftentimes, this remote repository is stored on GitHub). The `git push` command is used to send local commits up to a remote repository. The `git pull` command is used to fetch changes from a remote repository and merge them into the local repository – **pull**ing will become a regular part of your workflow when collaborating with others, or even when working alone but on different machines (e.g. a laptop at home and a desktop at the office).
+
+The processes described in the above sections (i.e. making changes to local working files, recording “snapshots” of them to create a versioned history of changes in a local Git repository, and sending those versions from our local Git repository to a remote repository (which is oftentimes on GitHub)) is illustrated using islands, buildings, bunnies, and packages in the artwork, below:
+
+![Artwork by Allison Horst](240410_brown_bag_files/allison-horst-git-workflow%20(1).png)
+
+> **\
+> What should I write in my commit message?**
+>
+> Writing effective Git commit messages is essential for creating a meaningful and helpful version history in your repository. It is crucial to avoid skipping commit messages or resorting to generic phrases like “Updates.” When it comes to following best practices, there are several guidelines to enhance the readability and maintainability of the codebase.
+>
+> Here are some guidelines for writing effective Git commit messages:
+>
+> 1.  **Be descriptive and concise**: Provide a clear and concise summary of the changes made in the commit. Aim to convey the purpose and impact of the commit in a few words.
+>
+> 2.  **Use imperative tense**: Write commit messages in the imperative tense, as if giving a command. For example, use “Add feature” instead of “Added feature” or “Adding feature.” This convention aligns with other Git commands and makes the messages more actionable.
+>
+> 3.  **Separate subject and body**: Start with a subject line, followed by a blank line, and then provide a more detailed explanation in the body if necessary. The subject line should be a short, one-line summary, while the body can provide additional context, motivation, or details about the changes.
+>
+> 4.  **Limit the subject line length**: Keep the subject line within 50 characters or less. This ensures that the commit messages are easily scannable and fit well in tools like Git logs.
+>
+> 5.  **Capitalize and punctuate properly**: Begin the subject line with a capital letter and use proper punctuation. This adds clarity and consistency to the commit messages.
+>
+> 6.  **Focus on the “what” and “why”**: Explain what changes were made and why they were made. Understanding the motivation behind a commit helps future researchers and collaborators (including you!) comprehend its purpose.
+>
+> 7.  **Use present tense for subject, past tense for body**: Write the subject line in present tense as it represents the current state of the codebase. Use past tense in the body to describe what has been done.
+>
+> 8.  **Reference relevant issues**: If the commit is related to a specific issue or task, include a reference to it. For example, you can mention the issue number or use keywords like “Fixes,” “Closes,” or “Resolves” followed by the issue number.
 
 # Add Git to PATH Manually
 
@@ -206,7 +299,7 @@ GitHub recently deprecated password authentication for accessing repositories, s
 
 The book [*Happy Git and GitHub for the useR*](https://happygitwithr.com/) has a wealth of information related to working with Git in R, and these instructions are based off of [Chapter 9: Personal Access Token for HTTPS](https://happygitwithr.com/https-pat.html).
 
-We will be using a **Personal Access Token (PAT)** in this course. For better security and long term use, we recommend taking the extra steps to set up SSH keys (check out [Chapter 10 Set up Keys for SSH](https://happygitwithr.com/ssh-keys.html)).
+We will be using a **Personal Access Token (PAT)**
 
 ### Setting Up Your PAT
 
@@ -221,6 +314,10 @@ Congrats! Now you’ve set up your authentication, and you should be able to wor
 
 > **Note:** For better security and long term use, we recommend taking the extra steps to set up SSH keys (check out Chapter 10 Set up Keys for SSH in the book *Happy Git and GitHub for the useR*).
 
+# Clone a Repository from GitHub to R Studio
+
+Let's bring a copy of this remote repository down to our local computer (aka **clone** this repository) so that we can work comfortably in RStudio.
+
 # Organizing an R Project
 
 When starting a new research project, one of the first things I do is create an R Project for it (just like we have here!). The next step is to then populate that project with relevant directories. There are many tools out there that can do this automatically. Some examples are `rrtools` or `usethis::create_package()`. The goal is to organize your project so that it is a compendium of your research. This means that the project has all of the digital parts needed to replicate your analysis, like code, figures, the manuscript, and data access.
@@ -234,12 +331,11 @@ When starting a new research project, one of the first things I do is create an 
 
 Directory organization will vary from project to project, but the ultimate goal is to create a well-organized project that supports both reproducibility and collaboration.
 
-Git resources Pro Git Book Happy Git and GitHub for the useR GitHub Documentation Learn Git Branching is an interactive tool to learn Git on the command line Software Carpentry Version Control with Git Bitbucket’s tutorials on Git Workflows
+![](240410_brown_bag_files/rproj-basic-organization.png)
 
 # Set up a Quarto Document:
 
-**\
-Setup**
+## \*\* Setup\*\*
 
 -   Open a new Quarto file using the following prompts: File \> New File \> Quarto Document
 
@@ -262,7 +358,7 @@ Notice how the grey **R code chunks** are surrounded by 3 back-ticks and `{r LAB
 The table below show some of the options available to customizing outputs ([Quarto.org](https://quarto.org/docs/computations/execution-options.html)).
 
 |               |                                                                                                                                             |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-------------------------|-----------------------------------------------|
 |               | Code chunk options                                                                                                                          |
 | Option        | Description                                                                                                                                 |
 | `#| eval:`    | Evaluate the code chunk (if `false`, just echos the code into the output).                                                                  |
