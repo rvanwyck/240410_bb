@@ -638,7 +638,7 @@ You can then write all of your R code in your RMarkdown/Quarto, and generate you
 
 -   You can read the `renv.lock` file using `renv::restore()`, when needed. This will install the versions of the packages needed.
 
-## **Conserve your computational environement with Docker**
+## **Conserve your computational environment with Docker**
 
 -   The `rrtools` package then uses this `renv.lock` file to build what is called a Dockerfile.
 
