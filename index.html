@@ -72,6 +72,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="connecting-github-to-rstudio-for-reproducible-research" class="level2">
 <h2 class="anchored" data-anchor-id="connecting-github-to-rstudio-for-reproducible-research">Connecting GitHub to RStudio for Reproducible Research</h2>
 <p><strong>Note:</strong> Brown Bag attendees will learn more from my presentation if they 1) bring their laptop or follow along on Zoom, 2) have <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> loaded already to their machine, and 3) have a <a href="https://github.com/">GitHub</a> account already. Make sure that Git is either installed on your system or the path to the Git executable is added to your system’s PATH environment variable.</p>
+<blockquote class="blockquote">
 <p><strong>Subnote on YAML:</strong></p>
 <p>YAML Is the document’s metadata which sets guidelines on how your want the output of your document to look like. It is located at the top of your file, delineated by three dashes (<code>---</code>) at the top and at the bottom of it. It can be used to specify:</p>
 <ul>
@@ -80,10 +81,19 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Add additional information such as the bibliography file (and formatting of the references)</p></li>
 <li><p>Specific parameters for your report (eg: just used a subset of the data).</p></li>
 </ul>
+</blockquote>
+<hr>
+<blockquote class="blockquote">
+<p>The information in this presentation was shamelessly taken from the February, 2024 materials from the Arctic Data Center training; <a href="https://learning.nceas.ucsb.edu/2024-02-arctic/">Reproducible Approaches to Arctic Research Using R</a></p>
+<ul>
+<li>Jeanette Clark, Angie Garcia, Matthew B. Jones, Justin Kadi, Maggie Klope, Camila Vargas Poulsen (2024), Reproducible Approaches to Arctic Research Using R. Arctic Data Center &amp; NCEAS Learning Hub. URL&nbsp;<a href="https://learning.nceas.ucsb.edu/2024-02-arctic" class="uri">https://learning.nceas.ucsb.edu/2024-02-arctic</a>.</li>
+</ul>
+</blockquote>
+<hr>
 </section>
 </section>
-<section id="what-is-reproducible-research" class="level1">
-<h1>What is Reproducible Research?</h1>
+<section id="lets-get-started-what-is-reproducible-research" class="level1">
+<h1>Let’s get started: What is Reproducible Research?</h1>
 <p>Reproducible analysis allow you to automatize how the figures and the statistics in your analysis are generated. This process also helps your collaborators, your readers and your future self to follow your code trail the leads to the original data, increasing the transparency of your science.</p>
 <p>Literate analysis help reduce the mistakes from copying and pasting across software, keeps results and models in sync, and allows you to provide interested readers with more information about the different approaches and analyses you tried before coming up with the final results (British Ecological Society (<a href="https://learning.nceas.ucsb.edu/2024-02-arctic/session_03.html#ref-britecolsoc2017">2017</a>)).</p>
 <p>Every file in the scientific process changes. Manuscripts are edited. Figures get revised. Code gets fixed when bugs are discovered. Sometimes those fixes lead to even more bugs, leading to more changes in the code base. Data files get combined together. Sometimes those same files are split and combined again. In just one research project, we can expect thousands of changes to occur.</p>
@@ -107,6 +117,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p><strong>Assign meaningful tags</strong> to specific versions of our code.</p></li>
 <li><p>Additionally, Git offers a powerful distributed feature. <strong>Multiple individuals can work on the same analysis concurrently</strong> on their own computers, with the ability to merge everyone’s changes together.</p></li>
 </ul>
+<hr>
 </section>
 </section>
 <section id="but-before-we-dive-into-git-and-github" class="level1">
@@ -133,9 +144,8 @@ ul.task-list li input[type="checkbox"] {
 <p>A recent study of publicly-available datasets in the Harvard Database repository containing R files found that only 26% of R files ran without error in the initial execution. 44% were able to be run after code cleaning, showing the importance of good programming practice (<a href="https://learning.nceas.ucsb.edu/2024-02-arctic/session_20.html#ref-trisovic2022">Trisovic et al.&nbsp;2022</a>). The figure below from Trisovic et al.&nbsp;shows a <em>sankey diagram</em> of how code cleaning was able to fix common errors.</p>
 <p><img src="240410_brown_bag_files/code-reproducibility-trisovic.png" class="img-fluid" width="880"></p>
 </section>
-</section>
-<section id="computational-provenance-and-workflows" class="level1">
-<h1><strong>Computational Provenance and Workflows</strong></h1>
+<section id="computational-provenance-and-workflows" class="level2">
+<h2 class="anchored" data-anchor-id="computational-provenance-and-workflows"><strong>Computational Provenance and Workflows</strong></h2>
 <p>Computational provenance refers to the origin and processing history of data including:</p>
 <ul>
 <li><p>Input data</p></li>
@@ -145,14 +155,16 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Methods, dataflow, and dependencies</p></li>
 </ul>
 <p>When we put these all together with formal documentation, we create a <strong>computational workflow</strong> that captures all of the steps from initial data cleaning and integration, through analysis, modeling, and visualization. In other words, <strong>computational provenance is a formalized description of a workflow from the origin of the data to it’s final outcome</strong>.</p>
-<p>Here’s an example of a computational workflow from Mark Carls: <a href="https://search.dataone.org/view/urn%3Auuid%3A3249ada0-afe3-4dd6-875e-0f7928a4c171">Mark Carls. Analysis of hydrocarbons following the Exxon Valdez oil spill, Gulf of Alaska, 1989 - 2014. Gulf of Alaska Data Portal. urn:uuid:3249ada0-afe3-4dd6-875e-0f7928a4c171.</a>, that represents a three step workflow comprising four source data files and two output visualizations.Checking and Installing Git</p>
+<p>Here’s an example of a computational workflow from Mark Carls: <a href="https://search.dataone.org/view/urn%3Auuid%3A3249ada0-afe3-4dd6-875e-0f7928a4c171">Mark Carls. Analysis of hydrocarbons following the Exxon Valdez oil spill, Gulf of Alaska, 1989 - 2014. Gulf of Alaska Data Portal. urn:uuid:3249ada0-afe3-4dd6-875e-0f7928a4c171.</a>, that represents a three step workflow comprising four source data files and two output visualizations.</p>
+<hr>
 <blockquote class="blockquote">
-<h2 id="check-if-git-is-installed" class="anchored" data-anchor-id="computational-provenance-and-workflows">Check if Git is Installed</h2>
+<h2 id="check-if-git-is-installed" class="anchored">Check if Git is Installed</h2>
 <p>First, ensure that Git is indeed installed on your computer. You can do this by trying to run <code>git --version</code> in your terminal or command prompt. If Git is installed, this command will return the version of Git you have installed.</p>
 <h2 id="install-git" class="anchored">Install Git</h2>
 <p>If Git is not installed, you’ll need to download and install it. You can download Git from <a href="https://git-scm.com">git-scm.com</a>. During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.</p>
 <p>Are you getting any errors? <a href="240410_brown_bag.html">Setting the Path to Git Manually</a></p>
 </blockquote>
+<hr>
 <section id="what-exactly-are-git-and-github" class="level3">
 <h3 class="anchored" data-anchor-id="what-exactly-are-git-and-github"><strong>What <em>exactly</em> are Git and GitHub?</strong></h3>
 <p><img src="240410_brown_bag_files/git-intro.png" class="img-fluid" width="417"></p>
@@ -216,6 +228,8 @@ What should I write in my commit message?</strong></p>
 <li><p><strong>Reference relevant issues</strong>: If the commit is related to a specific issue or task, include a reference to it. For example, you can mention the issue number or use keywords like “Fixes,” “Closes,” or “Resolves” followed by the issue number.</p></li>
 </ol>
 </blockquote>
+<hr>
+</section>
 </section>
 </section>
 </section>
@@ -281,11 +295,12 @@ What should I write in my commit message?</strong></p>
 <pre><code>git config pull.rebase false</code></pre>
 <p><code>pull.rebase false</code> is a default strategy for pulling where Git will first try to auto-merge the files. If auto-merging is not possible, it will indicate a merge conflict.</p>
 </blockquote>
+<hr>
 </section>
 </section>
 </section>
-<section id="collaborating-with-a-trusted-colleague-without-conflicts" class="level1">
-<h1><strong>Collaborating with a trusted colleague without conflicts</strong></h1>
+<section id="collaborating-with-a-trusted-colleagues-without-conflicts" class="level1">
+<h1><strong>Collaborating with a trusted colleagues without conflicts</strong></h1>
 <p>We start our collaboration by giving a trusted colleague access to our repository on GitHub. In this example, we define the <strong>Owner as the individual who owns the repository</strong>, and the <strong>Collaborator as the person whom the Owner chooses to give permission to make changes to their repository</strong>.</p>
 <p>The Collaborator will make changes to the repository and then <code>push</code> those changes to the shared repository on GitHub. The Owner will then use <code>pull</code> to retrieve the changes without encountering any conflicts. <em>This is the most ideal workflow.</em></p>
 <p>The instructors will demonstrate this process in the next section.</p>
@@ -452,6 +467,7 @@ When working on projects with a small team or single developer with direct write
 <p>A good workflow is encapsulated as follows:</p>
 <p><code>Pull -&gt; Edit -&gt; Save -&gt; Add (stage) -&gt; Commit -&gt; Pull -&gt; (OPTIONAL) Fix any merge conflicts -&gt; Push</code></p>
 <p>It may take a bit of practice to get comfortable with navigating merge conflicts, but like any other technical skill, they’ll become less intimidating with time. With careful communication and a consistent workflow, conflicts can be largely avoided or resolved when they do occur.</p>
+<hr>
 </section>
 </section>
 <section id="organizing-an-r-project" class="level1">
@@ -634,6 +650,12 @@ RUN . /etc/environment \
 <li><p>This is called <strong>continuous integration,</strong> and is extremely convenient for developing products like this, since the build step can be taken care of automatically as you push to your repository.</p></li>
 </ul>
 </section>
+</section>
+<section id="and-thats-all-the-information-i-thought-i-could-share-today" class="level1">
+<h1>And that’s all the information I thought I could share today!</h1>
+<p>Thank you for attending my TED Talk.</p>
+<p>-Rebecca</p>
+<hr>
 <section id="additional-quarto-resources" class="level2">
 <h2 class="anchored" data-anchor-id="additional-quarto-resources"><strong>Additional Quarto Resources</strong></h2>
 <ul>

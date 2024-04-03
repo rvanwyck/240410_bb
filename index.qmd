@@ -10,19 +10,27 @@ author: "Rebecca"
 
 **Note:** Brown Bag attendees will learn more from my presentation if they 1) bring their laptop or follow along on Zoom, 2) have [RStudio](https://posit.co/download/rstudio-desktop/) loaded already to their machine, and 3) have a [GitHub](https://github.com/) account already. Make sure that Git is either installed on your system or the path to the Git executable is added to your system's PATH environment variable.
 
-**Subnote on YAML:**
+> **Subnote on YAML:**
+>
+> YAML Is the document’s metadata which sets guidelines on how your want the output of your document to look like. It is located at the top of your file, delineated by three dashes (`---`) at the top and at the bottom of it. It can be used to specify:
+>
+> -   Characteristics of your documents such at title, author, date of creation.
+>
+> -   Argument to pass on the building process to control the format of the output.
+>
+> -   Add additional information such as the bibliography file (and formatting of the references)
+>
+> -   Specific parameters for your report (eg: just used a subset of the data).
 
-YAML Is the document’s metadata which sets guidelines on how your want the output of your document to look like. It is located at the top of your file, delineated by three dashes (`---`) at the top and at the bottom of it. It can be used to specify:
+------------------------------------------------------------------------
 
--   Characteristics of your documents such at title, author, date of creation.
+> The information in this presentation was shamelessly taken from the February, 2024 materials from the Arctic Data Center training; [Reproducible Approaches to Arctic Research Using R](https://learning.nceas.ucsb.edu/2024-02-arctic/)
+>
+> -   Jeanette Clark, Angie Garcia, Matthew B. Jones, Justin Kadi, Maggie Klope, Camila Vargas Poulsen (2024), Reproducible Approaches to Arctic Research Using R. Arctic Data Center & NCEAS Learning Hub. URL <https://learning.nceas.ucsb.edu/2024-02-arctic>.
 
--   Argument to pass on the building process to control the format of the output.
+------------------------------------------------------------------------
 
--   Add additional information such as the bibliography file (and formatting of the references)
-
--   Specific parameters for your report (eg: just used a subset of the data).
-
-# What is Reproducible Research?
+# Let's get started: What is Reproducible Research?
 
 Reproducible analysis allow you to automatize how the figures and the statistics in your analysis are generated. This process also helps your collaborators, your readers and your future self to follow your code trail the leads to the original data, increasing the transparency of your science.
 
@@ -60,6 +68,8 @@ The version control system we’ll be diving into is Git, the most widely used m
 
 -   Additionally, Git offers a powerful distributed feature. **Multiple individuals can work on the same analysis concurrently** on their own computers, with the ability to merge everyone’s changes together.
 
+------------------------------------------------------------------------
+
 # But Before we dive into Git and GitHub...
 
 ## In Summary:
@@ -94,7 +104,7 @@ A recent study of publicly-available datasets in the Harvard Database repository
 
 ![](240410_brown_bag_files/code-reproducibility-trisovic.png){width="880"}
 
-# **Computational Provenance and Workflows**
+## **Computational Provenance and Workflows**
 
 Computational provenance refers to the origin and processing history of data including:
 
@@ -110,7 +120,9 @@ Computational provenance refers to the origin and processing history of data inc
 
 When we put these all together with formal documentation, we create a **computational workflow** that captures all of the steps from initial data cleaning and integration, through analysis, modeling, and visualization. In other words, **computational provenance is a formalized description of a workflow from the origin of the data to it’s final outcome**.
 
-Here’s an example of a computational workflow from Mark Carls: [Mark Carls. Analysis of hydrocarbons following the Exxon Valdez oil spill, Gulf of Alaska, 1989 - 2014. Gulf of Alaska Data Portal. urn:uuid:3249ada0-afe3-4dd6-875e-0f7928a4c171.](https://search.dataone.org/view/urn%3Auuid%3A3249ada0-afe3-4dd6-875e-0f7928a4c171), that represents a three step workflow comprising four source data files and two output visualizations.Checking and Installing Git
+Here’s an example of a computational workflow from Mark Carls: [Mark Carls. Analysis of hydrocarbons following the Exxon Valdez oil spill, Gulf of Alaska, 1989 - 2014. Gulf of Alaska Data Portal. urn:uuid:3249ada0-afe3-4dd6-875e-0f7928a4c171.](https://search.dataone.org/view/urn%3Auuid%3A3249ada0-afe3-4dd6-875e-0f7928a4c171), that represents a three step workflow comprising four source data files and two output visualizations.
+
+------------------------------------------------------------------------
 
 > ## Check if Git is Installed
 >
@@ -121,6 +133,8 @@ Here’s an example of a computational workflow from Mark Carls: [Mark Carls. An
 > If Git is not installed, you'll need to download and install it. You can download Git from [git-scm.com](https://git-scm.com). During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.
 >
 > Are you getting any errors? [Setting the Path to Git Manually](240410_brown_bag.html)
+
+------------------------------------------------------------------------
 
 ### **What *exactly* are Git and GitHub?**
 
@@ -201,6 +215,8 @@ The processes described in the above sections (i.e. making changes to local wor
 >
 > 8.  **Reference relevant issues**: If the commit is related to a specific issue or task, include a reference to it. For example, you can mention the issue number or use keywords like “Fixes,” “Closes,” or “Resolves” followed by the issue number.
 
+------------------------------------------------------------------------
+
 # Enough of the explanations: Set Up Global Options in Git
 
 Before using Git, you need to tell it who you are, also known as setting the global options. To do this, we will be setting the global options in the Terminal.
@@ -280,7 +296,9 @@ Congrats! Now you’ve set up your authentication, and you should be able to wor
 >
 > `pull.rebase false` is a default strategy for pulling where Git will first try to auto-merge the files. If auto-merging is not possible, it will indicate a merge conflict.
 
-# **Collaborating with a trusted colleague without conflicts**
+------------------------------------------------------------------------
+
+# **Collaborating with a trusted colleagues without conflicts**
 
 We start our collaboration by giving a trusted colleague access to our repository on GitHub. In this example, we define the **Owner as the individual who owns the repository**, and the **Collaborator as the person whom the Owner chooses to give permission to make changes to their repository**.
 
@@ -451,6 +469,8 @@ A good workflow is encapsulated as follows:
 `Pull -> Edit -> Save -> Add (stage) -> Commit -> Pull -> (OPTIONAL) Fix any merge conflicts -> Push`
 
 It may take a bit of practice to get comfortable with navigating merge conflicts, but like any other technical skill, they’ll become less intimidating with time. With careful communication and a consistent workflow, conflicts can be largely avoided or resolved when they do occur.
+
+------------------------------------------------------------------------
 
 # Organizing an R Project
 
@@ -653,6 +673,14 @@ RUN . /etc/environment \
 -   This means that the code that knits your paper is run, and an updated version of your paper is knit.
 
 -   This is called **continuous integration,** and is extremely convenient for developing products like this, since the build step can be taken care of automatically as you push to your repository.
+
+# And that's all the information I thought I could share today!
+
+Thank you for attending my TED Talk.
+
+-Rebecca
+
+------------------------------------------------------------------------
 
 ## **Additional Quarto Resources**
 
