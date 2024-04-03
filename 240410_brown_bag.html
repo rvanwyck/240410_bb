@@ -71,14 +71,94 @@ ul.task-list li input[type="checkbox"] {
 <h1>Commit - Pull - Push</h1>
 <section id="connecting-github-to-rstudio-for-reproducible-research" class="level2">
 <h2 class="anchored" data-anchor-id="connecting-github-to-rstudio-for-reproducible-research">Connecting GitHub to RStudio for Reproducible Research</h2>
-<p><strong>Note:</strong> Brown Bag attendees will learn more from my presentation if they 1) bring their laptop or follow along on Zoom, 2) have <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> loaded already to their machine, and 3) have a <a href="https://github.com/">GitHub</a> account already.</p>
+<p><strong>Note:</strong> Brown Bag attendees will learn more from my presentation if they 1) bring their laptop or follow along on Zoom, 2) have <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> loaded already to their machine, and 3) have a <a href="https://github.com/">GitHub</a> account already. Make sure that Git is either installed on your system or the path to the Git executable is added to your system’s PATH environment variable.</p>
+</section>
+</section>
+<section id="checking-and-installing-git" class="level1">
+<h1>Checking and Installing Git</h1>
+<section id="check-if-git-is-installed" class="level2">
+<h2 class="anchored" data-anchor-id="check-if-git-is-installed">Check if Git is Installed</h2>
+<p>First, ensure that Git is indeed installed on your computer. You can do this by trying to run <code>git --version</code> in your terminal or command prompt. If Git is installed, this command will return the version of Git you have installed.</p>
+</section>
+<section id="install-git" class="level2">
+<h2 class="anchored" data-anchor-id="install-git">Install Git</h2>
+<p>If Git is not installed, you’ll need to download and install it. You can download Git from <a href="https://git-scm.com">git-scm.com</a>. During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.</p>
+</section>
+<section id="add-git-to-path-manually" class="level2">
+<h2 class="anchored" data-anchor-id="add-git-to-path-manually">Add Git to PATH Manually</h2>
+<p>If Git is installed but not recognized, you might need to add Git to your system’s PATH manually. The PATH is an environment variable that lists the directories the operating system should look in for executable files.</p>
+</section>
+</section>
+<section id="git-installation-guide" class="level1">
+<h1>Git Installation Guide</h1>
+<section id="for-windows" class="level2">
+<h2 class="anchored" data-anchor-id="for-windows">For Windows</h2>
+<section id="verify-git-installation" class="level3">
+<h3 class="anchored" data-anchor-id="verify-git-installation">Verify Git Installation</h3>
+<p>Make sure Git is installed on your computer. You can download it from <a href="https://git-scm.com">git-scm.com</a>.</p>
+</section>
+<section id="locate-git-installation-path" class="level3">
+<h3 class="anchored" data-anchor-id="locate-git-installation-path">Locate Git Installation Path</h3>
+<p>Find where Git is installed. The default path is usually <code>C:\\Program Files\\Git</code>.</p>
+</section>
+<section id="edit-system-path" class="level3">
+<h3 class="anchored" data-anchor-id="edit-system-path">Edit System PATH</h3>
+<ul>
+<li>Open the Start Search, type in “env”, and choose “Edit the system environment variables”.</li>
+<li>In the System Properties window, click on the “Environment Variables…” button.</li>
+<li>In the Environment Variables window, under “System variables”, find and select the “Path” variable, then click “Edit”.</li>
+<li>In the Edit Environment Variable window, click “New” and add the Git installation path followed by <code>\\bin</code>. For example, <code>C:\\Program Files\\Git\\bin</code>.</li>
+<li>Click “OK” to close all windows and apply the changes.</li>
+</ul>
+</section>
+<section id="restart-your-computer" class="level3">
+<h3 class="anchored" data-anchor-id="restart-your-computer">Restart Your Computer</h3>
+<p>For the changes to take effect, you might need to restart your computer.</p>
+</section>
+</section>
+<section id="for-macoslinux" class="level2">
+<h2 class="anchored" data-anchor-id="for-macoslinux">For macOS/Linux</h2>
+<section id="check-git-installation" class="level3">
+<h3 class="anchored" data-anchor-id="check-git-installation">Check Git Installation</h3>
+<p>Typically, Git is already installed on macOS and most Linux distributions. You can verify this by running <code>git --version</code> in the terminal.</p>
+</section>
+<section id="update-path-if-necessary" class="level3">
+<h3 class="anchored" data-anchor-id="update-path-if-necessary">Update PATH if Necessary</h3>
+<ul>
+<li>Open your terminal.</li>
+<li>Edit your shell profile file (like <code>.bash_profile</code>, <code>.bashrc</code>, or <code>.zshrc</code>) using a text editor (e.g., <code>nano ~/.bash_profile</code>).</li>
+<li>Add a line like <code>export PATH="/usr/local/bin:$PATH"</code> (adjust the path if Git is installed in a different location).</li>
+<li>Save the file and run <code>source ~/.bash_profile</code> to apply the changes.</li>
+</ul>
+</section>
+<section id="verify-the-change" class="level3">
+<h3 class="anchored" data-anchor-id="verify-the-change">Verify the Change</h3>
+<p>Reopen the terminal and type <code>git --version</code> to check if Git is now recognized.</p>
+</section>
+</section>
+<section id="restart-terminal" class="level2">
+<h2 class="anchored" data-anchor-id="restart-terminal">Restart Terminal</h2>
+<p>After installing Git or modifying the PATH, you may need to restart your terminal or command prompt for the changes to take effect.</p>
+</section>
+<section id="using-git" class="level2">
+<h2 class="anchored" data-anchor-id="using-git">Using Git</h2>
+<p>Once Git is properly installed and recognized by your system, you should be able to run the <code>git config --global user.name "rvanwyck"</code> command without any issues. This command sets your username in the global Git configuration, which is used to identify you in your commits.</p>
 <section id="make-sure-that-your-working-directory-is-set-in-rstudio" class="level3">
 <h3 class="anchored" data-anchor-id="make-sure-that-your-working-directory-is-set-in-rstudio">Make sure that your working directory is set in RStudio</h3>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "C:/Users/rkvanwyck/Documents/training_rkvanwyck/240410_bb"</code></pre>
-</div>
-</div>
+<pre class="{r}"><code>getwd()
+
+## If the result is not what you want reset your working directory
+## setwd("X:/YOUR PREFERED WORKING DIRECTORY")</code></pre>
+<p>If you’re encountering an error when using <strong>‘usethis::create_package()’</strong> in RStudioX, it could be due to several reasons. The <strong>‘create_package()’</strong> function from the usethis package is designed to set up a new R package structure for you.</p>
+<p><strong>Package Installation:</strong> Ensure that the <strong>‘usethis’</strong> package is correctly installed. If not, you can install it using:</p>
+<pre class="{r}"><code>## install.packages("usethis")</code></pre>
+<p>To configure your global options in Git, especially within the context of R package development, you can use the <strong>‘usethis’</strong> package. The <strong>‘usethis’</strong> package allows you to set personal defaults for various settings. For example, you can specify defaults for your role as a package maintainer or for your preferred license in the <strong>‘.Rprofile’</strong> file.</p>
+<pre class="{r}"><code>options(
+  usethis.description = list(
+    `Authors@R` = 'person("Jane", "Doe", email = "jane@example.com")',
+    License = "MIT + file LICENSE"
+  )
+)</code></pre>
 <p>Git resources Pro Git Book Happy Git and GitHub for the useR GitHub Documentation Learn Git Branching is an interactive tool to learn Git on the command line Software Carpentry Version Control with Git Bitbucket’s tutorials on Git Workflows</p>
 </section>
 </section>
