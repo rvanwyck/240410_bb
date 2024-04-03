@@ -1,7 +1,589 @@
 ---
-title: "index.qmd"
-format: html
-author: "rebecca"
+title: "240410 Brown Bag" 
+format: html 
+author: "Rebecca" 
 ---
 
-# Hello World
+# Commit - Pull - Push
+
+## Connecting GitHub to RStudio for Reproducible Research
+
+**Note:** Brown Bag attendees will learn more from my presentation if they 1) bring their laptop or follow along on Zoom, 2) have [RStudio](https://posit.co/download/rstudio-desktop/) loaded already to their machine, and 3) have a [GitHub](https://github.com/) account already. Make sure that Git is either installed on your system or the path to the Git executable is added to your system's PATH environment variable.
+
+**Subnote on YAML:**
+
+YAML Is the document’s metadata which sets guidelines on how your want the output of your document to look like. It is located at the top of your file, delineated by three dashes (`---`) at the top and at the bottom of it. It can be used to specify:
+
+-   Characteristics of your documents such at title, author, date of creation.
+
+-   Argument to pass on the building process to control the format of the output.
+
+-   Add additional information such as the bibliography file (and formatting of the references)
+
+-   Specific parameters for your report (eg: just used a subset of the data).
+
+**Best Practice**
+
+It is generally good practice to include all of your `library()` calls in a single, dedicated R chunk near the top of your document. This lets collaborators know what packages they might need to install before they start running your code.
+
+# What is Reproducible Research?
+
+Reproducible analysis allow you to automatize how the figures and the statistics in your analysis are generated. This process also helps your collaborators, your readers and your future self to follow your code trail the leads to the original data, increasing the transparency of your science.
+
+Literate analysis help reduce the mistakes from copying and pasting across software, keeps results and models in sync, and allows you to provide interested readers with more information about the different approaches and analyses you tried before coming up with the final results (British Ecological Society ([2017](https://learning.nceas.ucsb.edu/2024-02-arctic/session_03.html#ref-britecolsoc2017))).
+
+Every file in the scientific process changes. Manuscripts are edited. Figures get revised. Code gets fixed when bugs are discovered. Sometimes those fixes lead to even more bugs, leading to more changes in the code base. Data files get combined together. Sometimes those same files are split and combined again. In just one research project, we can expect thousands of changes to occur.
+
+These changes are important to track, and yet, we often use simplistic file names to do so. Many of us have experienced renaming a document or script multiple times with the ingenuine addition of “final” to the file name (like the comic above demonstrates).
+
+You might think there is a better way, and you’d be right: **version control**. Version control provides an organized and transparent way to track changes in code and additional files. This practice was designed for software development, but is easily applicable to scientific programming.
+
+There are many benefits to using a version control software including:
+
+-   **Maintain a history** of your research project’s development while keeping your workspace clean
+
+-   **Facilitate collaboration** and transparency when working on teams
+
+-   **Explore bugs or new features** without disrupting your team members’ work
+
+-   and more!
+
+The version control system we’ll be diving into is Git, the most widely used modern version control system in the world.
+
+#### With Git we can enhance our workflow:
+
+-   **Eliminate** the need for **cryptic filenames** and comments to track our work.
+
+-   Provide **detailed descriptions of our changes** through commits, making it easier to understand the reasons behind code modifications.
+
+-   Work on multiple **branches** simultaneously, allowing for parallel development, and optionally merge them together.
+
+-   Use commits to **access and even execute older versions** of our code.
+
+-   **Assign meaningful tags** to specific versions of our code.
+
+-   Additionally, Git offers a powerful distributed feature. **Multiple individuals can work on the same analysis concurrently** on their own computers, with the ability to merge everyone’s changes together.
+
+> # Checking and Installing Git
+>
+> ## Check if Git is Installed
+>
+> First, ensure that Git is indeed installed on your computer. You can do this by trying to run `git --version` in your terminal or command prompt. If Git is installed, this command will return the version of Git you have installed.
+>
+> ## Install Git
+>
+> If Git is not installed, you'll need to download and install it. You can download Git from [git-scm.com](https://git-scm.com). During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.
+
+### **What *exactly* are Git and GitHub?**
+
+![](240410_brown_bag_files/git-intro.png){width="417"}
+
+#### Git:
+
+-   an open-source distributed **version control** software
+
+-   designed to manage the versioning and tracking of source code files and project history
+
+-   **operates locally** on your computer, allowing you to create repositories, and track changes
+
+-   provides features such as committing changes, branching and merging code, reverting to previous versions, and managing project history
+
+-   works directly with the files on your computer and does not require a network connection to perform most operations
+
+-   primarily used through the command-line interface (CLI, e.g. Terminal), but also has various GUI tools available (e.g. RStudio IDE)
+
+    ![](240410_brown_bag_files/github-intro.png){width="428"}
+
+#### GitHub:
+
+-   **online platform** and service built around Git
+
+-   provides a **centralized hosting platform for Git repositories**
+
+-   allows us to store, manage, and collaborate on their Git repositories in the cloud
+
+-   offers additional features on top of Git, such as a web-based interface, issue tracking, project management tools, pull requests, code review, and collaboration features
+
+-   enables easy sharing of code with others, facilitating collaboration and contribution to open source projects
+
+-   provides a social aspect, allowing users to follow projects, star repositories, and discover new code
+
+### **Understanding how local working files, Git, and GitHub all work together**
+
+It can be a bit daunting to understand all the moving parts of the Git / GitHub life cycle (i.e. how file changes are tracked locally within repositories, then stored for safe-keeping and collaboration on remote repositories, then brought back down to a local machine(s) for continued development). It gets easier with practice, but we’ll explain (first in words, then with an illustration) at a high-level how things work:
+
+#### 6.2.3.1 What is the difference between a “normal” folder vs. a Git repository
+
+Whether you’re a Mac or a PC user, you’ll likely have created a folder at some point in time for organizing files. Let’s pretend that we create a folder, called `myFolder/`, and add two files: `myData.csv` and `myAnalysis.R`. The contents of this folder are not currently version controlled – meaning, for example, that if we make some changes to `myAnalysis.R` that don’t quite work out, we have no way of accessing or reverting back to a previous version of `myAnalysis.R` (without remembering/rewriting things, of course).
+
+Git allows you to turn any “normal” folder, like `myFolder/`, into a **Git repository** – you’ll often see/hear this referenced as “initializing a Git repository”. When you initialize a folder on your local computer as a Git repository, a hidden `.git/` folder is created *within* that folder (e.g. `myFolder/.git/`) – this `.git/` folder *is* the **Git repository**. As you use Git commands to capture versions or “snapshots” of your work, those versions (and their associated metadata) get stored within the `.git/` folder. This allows you to access and/or recover any previous versions of your work. If you delete `.git/`, you delete your project’s history.
+
+Here is our example folder / Git repository represented visually:
+
+![](240410_brown_bag_files/git-repo.png)
+
+#### My versioned work is on my local computer, but I want to send it to GitHub. How?
+
+The last step is synchronizing the changes made to our local repository with a remote repository (oftentimes, this remote repository is stored on GitHub). The `git push` command is used to send local commits up to a remote repository. The `git pull` command is used to fetch changes from a remote repository and merge them into the local repository – **pull**ing will become a regular part of your workflow when collaborating with others, or even when working alone but on different machines (e.g. a laptop at home and a desktop at the office).
+
+The processes described in the above sections (i.e. making changes to local working files, recording “snapshots” of them to create a versioned history of changes in a local Git repository, and sending those versions from our local Git repository to a remote repository (which is oftentimes on GitHub)) is illustrated using islands, buildings, bunnies, and packages in the artwork, below:
+
+![Artwork by Allison Horst](240410_brown_bag_files/allison-horst-git-workflow%20(1).png){alt="Artwork by Allison Horst"}
+
+> **\
+> What should I write in my commit message?**
+>
+> Writing effective Git commit messages is essential for creating a meaningful and helpful version history in your repository. It is crucial to avoid skipping commit messages or resorting to generic phrases like “Updates.” When it comes to following best practices, there are several guidelines to enhance the readability and maintainability of the codebase.
+>
+> Here are some guidelines for writing effective Git commit messages:
+>
+> 1.  **Be descriptive and concise**: Provide a clear and concise summary of the changes made in the commit. Aim to convey the purpose and impact of the commit in a few words.
+>
+> 2.  **Use imperative tense**: Write commit messages in the imperative tense, as if giving a command. For example, use “Add feature” instead of “Added feature” or “Adding feature.” This convention aligns with other Git commands and makes the messages more actionable.
+>
+> 3.  **Separate subject and body**: Start with a subject line, followed by a blank line, and then provide a more detailed explanation in the body if necessary. The subject line should be a short, one-line summary, while the body can provide additional context, motivation, or details about the changes.
+>
+> 4.  **Limit the subject line length**: Keep the subject line within 50 characters or less. This ensures that the commit messages are easily scannable and fit well in tools like Git logs.
+>
+> 5.  **Capitalize and punctuate properly**: Begin the subject line with a capital letter and use proper punctuation. This adds clarity and consistency to the commit messages.
+>
+> 6.  **Focus on the “what” and “why”**: Explain what changes were made and why they were made. Understanding the motivation behind a commit helps future researchers and collaborators (including you!) comprehend its purpose.
+>
+> 7.  **Use present tense for subject, past tense for body**: Write the subject line in present tense as it represents the current state of the codebase. Use past tense in the body to describe what has been done.
+>
+> 8.  **Reference relevant issues**: If the commit is related to a specific issue or task, include a reference to it. For example, you can mention the issue number or use keywords like “Fixes,” “Closes,” or “Resolves” followed by the issue number.
+
+# Add Git to PATH Manually
+
+If Git is installed but not recognized, you might need to add Git to your system's PATH manually. The PATH is an environment variable that lists the directories the operating system should look in for executable files.
+
+# Git Installation Guide
+
+## For Windows
+
+### Verify Git Installation
+
+Make sure Git is installed on your computer. You can download it from [git-scm.com](https://git-scm.com).
+
+### Locate Git Installation Path
+
+Find where Git is installed. The default path is usually `C:\\Program Files\\Git`.
+
+### Edit System PATH
+
+-   Open the Start Search, type in "env", and choose "Edit the system environment variables".
+-   In the System Properties window, click on the "Environment Variables..." button.
+-   In the Environment Variables window, under "System variables", find and select the "Path" variable, then click "Edit".
+-   In the Edit Environment Variable window, click "New" and add the Git installation path followed by `\\bin`. For example, `C:\\Program Files\\Git\\bin`.
+-   Click "OK" to close all windows and apply the changes.
+
+### Restart Your Computer
+
+For the changes to take effect, you might need to restart your computer.
+
+## For macOS/Linux
+
+### Check Git Installation
+
+Typically, Git is already installed on macOS and most Linux distributions. You can verify this by running `git --version` in the terminal.
+
+### Update PATH if Necessary
+
+-   Open your terminal.
+-   Edit your shell profile file (like `.bash_profile`, `.bashrc`, or `.zshrc`) using a text editor (e.g., `nano ~/.bash_profile`).
+-   Add a line like `export PATH="/usr/local/bin:$PATH"` (adjust the path if Git is installed in a different location).
+-   Save the file and run `source ~/.bash_profile` to apply the changes.
+
+### Verify the Change
+
+Reopen the terminal and type `git --version` to check if Git is now recognized.
+
+## Restart Terminal
+
+After installing Git or modifying the PATH, you may need to restart your terminal or command prompt for the changes to take effect.
+
+## Using Git
+
+Once Git is properly installed and recognized by your system, you should be able to run the `git config --global user.name "rvanwyck"` command without any issues. This command sets your username in the global Git configuration, which is used to identify you in your commits.
+
+### Make sure that your working directory is set in RStudio
+
+```{r} getwd()  ## If the result is not what you want reset your working directory ## setwd("X:/YOUR PREFERED WORKING DIRECTORY")}
+```
+
+If you're encountering an error when using **'usethis::create_package()'** in RStudioX, it could be due to several reasons. The **'create_package()'** function from the usethis package is designed to set up a new R package structure for you.
+
+**Package Installation:** Ensure that the **'usethis'** package is correctly installed. If not, you can install it using:
+
+```{r} ## install.packages("usethis")}
+```
+
+To configure your global options in Git, especially within the context of R package development, you can use the **'usethis'** package. The **'usethis'** package allows you to set personal defaults for various settings. For example, you can specify defaults for your role as a package maintainer or for your preferred license in the **'.Rprofile'** file.
+
+```{r} options(   usethis.description = list(     `Authors@R` = 'person("Jane", "Doe", email = "jane@example.com")'   ) )}
+```
+
+# Set Up Global Options in Git
+
+Before using Git, you need to tell it who you are, also known as setting the global options. To do this, we will be setting the global options in the Terminal.
+
+## What’s the Terminal?
+
+Technically, the Terminal is an interface for the shell, a computer program. To put that simply, we use the Terminal to tell a computer what to do. This is different from the Console in RStudio, which interprets R code and returns a value.
+
+## Opening a Terminal in RStudio
+
+To get started, let’s open a new Terminal window in RStudio. Do this by clicking `Tools > Terminal > New Terminal`.
+
+A Terminal tab should now be open where your Console usually is.
+
+## Dipping Your Toes in the Terminal
+
+Most of our Git operations will be done in RStudio, but there are some situations where you must work in the Terminal and use command line. It may be daunting to code in the Terminal, but as your comfort increases over time, you might find you prefer it. Either way, it’s beneficial to learn enough command line and to feel comfortable in the Terminal.
+
+## Configuring Git
+
+Let’s start by adding your user name to the global options. Type the following into the command prompt, with your exact GitHub username, and press enter:
+
+```{r} ## git config --global user.name "my_user_name"}
+```
+
+Note that if the code ran successfully, it will look like nothing happened. We will check at the end to make sure it worked.
+
+Next, enter the following line, with the email address you used when you created your account on [github.com](www.github.com):
+
+```{r} ## git config --global user.email "my_email@alaska.edu"}
+```
+
+# Setting Up Git Credentials
+
+Next, we will set our credentials to not time out for a very long time. This is related to how our server operating system handles credentials - not doing this will make your Personal Access Token (PAT, which we will set up in the next section) expire immediately on the system, even though it is actually valid for at least a month.
+
+## When Setting up Git and GitHub on Your Personal Computer
+
+You will not need to run the `git config` line below to set the cache. This is a specific configuration for the RStudio Server we are working on.
+
+```{r} ## git config --global credential.helper 'cache --timeout=10000000'}
+```
+
+Next, we will set the default branch name to `main` for any new repositories that are created moving forward. Why are we doing this? Previously, the default branch name was `master` and this racist terminology for Git branches motivates us to update our default branch to `main` instead.
+
+```{r} ## git config --global init.defaultBranch main}
+```
+
+Finally, check to make sure everything looks correct by entering this command, which will return the global options you have set.
+
+```{r} ## git config --global --list}
+```
+
+## 2.2.2 GitHub Authentication
+
+GitHub recently deprecated password authentication for accessing repositories, so we need to set up a secure way to authenticate.
+
+The book [*Happy Git and GitHub for the useR*](https://happygitwithr.com/) has a wealth of information related to working with Git in R, and these instructions are based off of [Chapter 9: Personal Access Token for HTTPS](https://happygitwithr.com/https-pat.html).
+
+We will be using a **Personal Access Token (PAT)**
+
+### Setting Up Your PAT
+
+-   Run `usethis::create_github_token()` in the Console.
+-   A new browser window should open up to GitHub, showing all the scopes options. Using `create_github_token()` automatically pre-selects some recommended scopes. Scroll to the bottom and click “Generate Token”.
+-   Copy the generated token.
+-   Back in RStudio, run `gitcreds::gitcreds_set()` in the Console.
+-   Paste your PAT when prompted.
+-   Last thing, run `usethis::git_sitrep()` in the Console to check your Git configuration and confirm that you’ve successfully stored your PAT.
+
+Congrats! Now you’ve set up your authentication, and you should be able to work with GitHub in RStudio.
+
+> **Note:** For better security and long term use, we recommend taking the extra steps to set up SSH keys (check out Chapter 10 Set up Keys for SSH in the book *Happy Git and GitHub for the useR*).
+
+> **Git configuration to surpress warning messages**
+>
+> Git version 2.27 includes a new feature that allows users to specify the default method for integrating changes from a remote repository into a local repository, without receiving a warning (this warning is informative, but can get annoying). To suppress this warning *for this repository only* we need to configure Git by running this line of code in the Terminal:
+>
+> ```         
+> git config pull.rebase false
+> ```
+>
+> `pull.rebase false` is a default strategy for pulling where Git will first try to auto-merge the files. If auto-merging is not possible, it will indicate a merge conflict.
+
+# **Collaborating with a trusted colleague without conflicts**
+
+We start our collaboration by giving a trusted colleague access to our repository on GitHub. In this example, we define the **Owner as the individual who owns the repository**, and the **Collaborator as the person whom the Owner chooses to give permission to make changes to their repository**.
+
+The Collaborator will make changes to the repository and then `push` those changes to the shared repository on GitHub. The Owner will then use `pull` to retrieve the changes without encountering any conflicts. *This is the most ideal workflow.*
+
+The instructors will demonstrate this process in the next section.
+
+### **Step 0: Owner adds a Collaborator to their repository on GitHub**
+
+The Owner must change the settings of the remote repository and give the Collaborator access to the repository by inviting them as a collaborator. Once the Collaborator accepts the owner’s invitation, they will have push access to the repository – meaning they can contribute their own changes/commits to the Owner’s repository.
+
+To do this, the owner will navigate to their remote repository on GitHub, then choose **Settings** \> **Collaborators** \> **Add people**, to send an email invitation. The invitation will show as “Pending” until accepted.
+
+### **Step 1: Collaborator clones the remote repository**
+
+In order to contribute, the Collaborator must **clone** the repository from the **Owner’s** GitHub account (*Note: as a Collaborator, you won’t see the repository appear under your profile’s Repositories page*). To do this, the Collaborator should navigate to the Owner’s repository on GitHub, then copy the clone URL. In RStudio, the Collaborator will create a new project from version control by pasting this clone URL into the appropriate dialog box.
+
+# **`clone` your repository and use Git locally in RStudio**
+
+Let's bring a copy of this remote repository down to our local computer (aka **clone** this repository) so that we can work comfortably in RStudio.
+
+> **An important distinction**
+>
+> We refer to the **remote copy** of the repository that is on GitHub as the **origin repository** (the one that we cloned from), and the copy on our local computer as the **local repository**.
+
+Start by clicking the green **Code** button (top right of your file listing) and copying the URL to your clipboard (this URL represents the repository location):
+
+![](240410_brown_bag_files/github-test-clone-url.png){width="646"}
+
+> **Setup**
+>
+> -   Click **File** \> **New Project**
+>
+> -   Select **Version Control** and paste the remote repository URL (which should be copied to your clipboard) in the **Repository ULR** field
+>
+> -   Press **Tab**, which will auto-fill the **Project directory name** field with the same name as that of your remote repo – while you can name the local copy of the repository anything, it’s typical (and highly recommended) to use the same name as the GitHub repository to maintain the correspondence
+>
+>     ![](240410_brown_bag_files/rstudio-clone-repo-sam.png)
+
+Once you click **Create Project**, a new RStudio window will open with all of the files from the remote repository copied locally. Depending on how your version of RStudio is configured, the location and size of the panes may differ, but they should all be present – you should see a **Git** tab, as well as the **Files** tab, where you can view all of the files copied from the remote repo to this local repo.
+
+> **Last thing, some Git configuration to surpress warning messages**
+>
+> Git version 2.27 includes a new feature that allows users to specify the default method for integrating changes from a remote repository into a local repository, without receiving a warning (this warning is informative, but can get annoying). To suppress this warning *for this repository only* we need to configure Git by running this line of code in the Terminal:
+>
+> ```         
+> git config pull.rebase false
+> ```
+>
+> `pull.rebase false` is a default strategy for pulling where Git will first try to auto-merge the files. If auto-merging is not possible, it will indicate a merge conflict.
+>
+> **`.gitignore` files allow you to specify which files/folders you *don’t* want Git to track**
+>
+> A `.gitignore` file is automatically created in the root directory of your project when you initialize it as a Git repository. You’ll notice that there are already some R / R Project-specific files that have been added by default.
+>
+> **Why is this useful?** For many reasons, but possibly the greatest use-case is adding large files (GitHub has a file size limit of 2 GB) or files with sensitive information (e.g. keys, tokens) that you don’t want to accidentally push to GitHub.
+>
+> **How do I do this?** Let’s say I create a file with sensitive information that I don’t want to push to GitHub. I can add a line to my `.gitignore` file:
+>
+> ```         
+> # added by default when I initalized my RProj as a Git Repository .Rproj.user .Rhistory .Rdata .httr-oauth .DS_Store .quarto  # add file so that it doesn't get pushed to the remote repo (on GitHub);  contains_sensitive_info.R
+> ```
+>
+> If this file is currently untracked by Git, it should appear in my **Git** tab. Once I add it to the `.gitignore` *and* save the modified `.gitignore` file, you should see `contains_sensitive_info.R` disappear from the **Git** tab, and a modified `.gitignore` (denoted by a blue **M**) appear. Stage/commit/push this modified `.gitignore` file.
+
+**Why do I need to add and commit files *before* pulling?**
+
+> Remember, `git pull` is a combination of `git fetch`ing remote changes to your local repo and `git merge`ing those changes from your local repo into your local working file(s).
+>
+> The **merge** part of `git pull` will fail if you have uncommitted changes in your local working file(s) to avoid any potential overwriting of your own changes. Because of this, you should always, add/commit *then* pull, *and finally* push.
+
+## **A Note on Advanced Collaboration Techniques**
+
+There are many Git and GitHub collaboration techniques, some more advanced than others. We won’t be covering advanced strategies in this course. But here is a table for your reference on a few popular Git collaboration workflow strategies and tools.
+
++------------------------------+---------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Collaboration Technique      | Benefits                                                                              | When to Use                                                                                                                              | When Not to Use                                                                                            |
++==============================+=======================================================================================+==========================================================================================================================================+============================================================================================================+
+| Branch Management Strategies | 1\. Enables parallel development and experimentation\                                 | When working on larger projects with multiple features or bug fixes simultaneously.\                                                     | When working on small projects with a single developer or limited codebase.\                               |
+|                              | 2. Facilitates isolation of features or bug fixes\                                    | When you want to maintain a stable main branch while developing new features or resolving issues on separate branches.\                  | When the project scope is simple and doesn’t require extensive branch management.\                         |
+|                              | 3. Provides flexibility and control over project workflows                            | When collaborating with teammates on different aspects of a project and later integrating their changes.                                 | When there is no need to isolate features or bug fixes.                                                    |
++------------------------------+---------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Code Review Practices        | 1\. Enhances code quality and correctness through feedback\                           | When collaborating on a codebase with team members to ensure code quality and maintain best practices.\                                  | When working on personal projects or small codebases with no collaboration involved.\                      |
+|                              | 2. Promotes knowledge sharing and learning within the team\                           | When you want to receive feedback and suggestions on your code to improve its readability, efficiency, or functionality.\                | When time constraints or project size make it impractical to conduct code reviews.\                        |
+|                              | 3. Helps identify bugs, improve performance, and ensure adherence to coding standards | When working on critical or complex code that requires an extra layer of scrutiny before merging it into the main branch.                | When the codebase is less critical or has low complexity.                                                  |
++------------------------------+---------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Forking                      | 1\. Enables independent experimentation and development\                              | When you want to contribute to a project without having direct write access to the original repository.\                                 | When collaborating on a project with direct write access to the original repository.\                      |
+|                              | 2. Provides a way to contribute to a project without direct access\                   | When you want to work on an independent variation or extension of an existing project.\                                                  | When the project does not allow external contributions or forking.\                                        |
+|                              | 3. Allows for creating separate, standalone copies of a repository                    | When experimenting with changes or modifications to a project while keeping the original repository intact.                              | When the project size or complexity doesn’t justify the need for independent variations.                   |
++------------------------------+---------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Pull Requests                | 1\. Facilitates code review and discussion\                                           | When working on a shared repository with a team and wanting to contribute changes in a controlled and collaborative manner.\             | When working on personal projects or individual coding tasks without the need for collaboration.\          |
+|                              | 2. Allows for collaboration and feedback from team members\                           | When you want to propose changes to a project managed by others and seek review and approval before merging them into the main codebase. | When immediate changes or fixes are required without review processes.\                                    |
+|                              | 3. Enables better organization and tracking of proposed changes                       |                                                                                                                                          | When working on projects with a small team or single developer with direct write access to the repository. |
++------------------------------+---------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+
+The “When Not to Use” column provides insights into situations where it *may* be less appropriate / unnecessary to use each collaboration technique, helping you make informed decisions based on the specific context and requirements of your project.
+
+These techniques provide different benefits and are used in various collaboration scenarios, depending on the project’s needs and team dynamics.
+
+## **Merge conflicts**
+
+**Merge conflicts** occur when both collaborators make conflicting changes to the same file. Resolving merge conflicts involves identifying the root of the problem and restoring the project to a normal state. Good communication, discussing file sections to work on, and avoiding overlaps can help prevent merge conflicts. However, if conflicts do arise, Git warns about potential issues and ensures that changes from different collaborators based on the same file version are not overwritten. To resolve conflicts, you need to explicitly specify whose changes should be used for each conflicting line in the file.
+
+In this image, we see collaborators `mbjones` and `metamattj` have both made changes to the same line in the same `README.md` file. This is causing a merge conflict because Git doesn’t know whose changes came first. To resolve it, we need to tell Git whose changes to keep for that line, and whose changes to discard.
+
+![](240410_brown_bag_files/git-conflict-00-lines-changed.png)
+
+### **Common ways to resolve a merge conflict**
+
+**1. Abort, abort, abort…**
+
+Sometimes you just made a mistake. When you get a merge conflict, the repository is placed in a “Merging” state until you resolve it. There’s a Terminal command to abort doing the merge altogether:
+
+```         
+git merge --abort
+```
+
+Of course, after doing that you still haven’t synced with your Collaborator’s changes, so things are still unresolved. But at least your repository is now usable on your local machine.
+
+**2. Checkout**
+
+The simplest way to resolve a conflict, given that you know whose version of the file you want to keep, is to use the command line to tell Git to use either **your** changes (the person doing the `merge`), or **their** changes (the Collaborator).
+
+-   keep your Collaborator’s file: `git checkout --theirs conflicted_file.Rmd`
+
+-   keep your own file: `git checkout --ours conflicted_file.Rmd`
+
+Once you have run that command, then run `add` (staging), `commit`, `pull`, and `push` the changes as normal.
+
+**3. Pull and edit the file**
+
+Option 2, above, requires the command line, however, we have a third option for resolving the merge conflict from RStudio. Using this approach will allow us to pick and choose some of our changes *and* some of our Collaborator’s changes by letting us manually edit and fix the conflicted file.
+
+When you `pull` a file with a conflict, Git will provide you with a warning modify the file so that it includes both your own changes and your Collaborator’s changes. The file will also appear in the **Git** tab with an orange `U` icon, which indicates that the file is `Unmerged` and therefore awaiting your help to resolve the conflict. It delimits these blocks of conflicted code with a series of less than and greater than signs, so they are easy to find:
+
+![](240410_brown_bag_files/rstudio-merge-conflict.png)
+
+In the above example, `<<<<<<< HEAD` marks the start of *your* changes. The `=======` delimiter separates your changes from your Collaborator’s conflicting changes. `>>>>>>>` mark the end of your Collaborator’s changes.
+
+To resolve the conflicts, simply find all of these blocks, and edit them so that the file looks how you want (either pick your lines, your Collaborator’s lines, some combination, or something altogether new), and save. Be sure you removed the delimiter lines that started with
+
+-   `<<<<<<<`
+
+-   `=======`
+
+-   `>>>>>>>`
+
+Once you have made those changes, you simply `add` (staging), `commit`, and `push` the files to resolve the conflict.Clone a Repository from GitHub to R Studio
+
+## **Best practices to avoid merge conflicts**
+
+Some basic rules of thumb can avoid the vast majority of merge conflicts, saving a lot of time and frustration. These are words our teams live by:
+
+-   Communicate often and set up effective communication channels
+
+-   Tell each other what you are working on
+
+-   Start your working session with a `pull`
+
+-   `Pull` immediately after you `commit` and before you `push`
+
+-   `Commit` often in small chunks (this helps you organize your work!)
+
+-   Make sure you and who you are collaborating with all **fully** understand the Git workflow you’re using (aka make sure you’re on the same page before you start)!
+
+A good workflow is encapsulated as follows:
+
+`Pull -> Edit -> Save -> Add (stage) -> Commit -> Pull -> (OPTIONAL) Fix any merge conflicts -> Push`
+
+It may take a bit of practice to get comfortable with navigating merge conflicts, but like any other technical skill, they’ll become less intimidating with time. With careful communication and a consistent workflow, conflicts can be largely avoided or resolved when they do occur.
+
+# Organizing an R Project
+
+When starting a new research project, one of the first things I do is create an R Project for it (just like we have here!). The next step is to then populate that project with relevant directories. There are many tools out there that can do this automatically. Some examples are `rrtools` or `usethis::create_package()`. The goal is to organize your project so that it is a compendium of your research. This means that the project has all of the digital parts needed to replicate your analysis, like code, figures, the manuscript, and data access.
+
+## Common Directories
+
+-   **data**: This is where we store our data. It often contains subdirectories for raw, processed, and metadata data.
+-   **R**: Contains scripts for cleaning or wrangling, etc. If your work includes scripts beyond the R programming language, this directory can be misleading, and you might prefer to call it `scripts`.
+-   **plots** or **figs**: This is for generated plots, graphs, and figures.
+-   **docs**: Here, you can put summaries or reports of analysis or other relevant project information.
+
+Directory organization will vary from project to project, but the ultimate goal is to create a well-organized project that supports both reproducibility and collaboration.
+
+![](240410_brown_bag_files/rproj-basic-organization.png){width="533"}
+
+# Set up a Quarto Document:
+
+## \*\* Setup\*\*
+
+-   Open a new Quarto file using the following prompts: File \> New File \> Quarto Document
+
+-   A popup window will appear.
+
+-   Give your file a new title, e.g “Introduction to Quarto”.
+
+-   Leave the output format as HTML and Engine set to Knitr.
+
+-   Then click the “Create” button.
+
+The first thing to notice is that by opening a file, we see the fourth pane of the RStudio pops up. This is our Quarto document which is essentially a text editor. We also see in the upper left side that we are looking at the document under the “Visual editor”. This is probably a familiar way of looking at a text document. To introduce the **markdown** syntax, we re going to move to the source editor and then come back to the visual editor. In the upper left corner, click on Source. See how the formatting changed? In the Source editor we are looking at the same text, but in markdown syntax. The visual editor on the other hand, allows us to see how markdown is rendered, therefore how is it going to look in our output document.
+
+## Render the Quarto document
+
+Let’s go ahead and render this file by clicking the “Render” button, next to the blue arrow at the top of the Quarto file. When you first click this button, RStudio will prompt you to save this file. Save it in the top level of your home directory on the server, and name it something that you will remember (like `quarto-intro.Rmd`).
+
+Notice how the grey **R code chunks** are surrounded by 3 back-ticks and `{r LABEL}`. The first chunk, in this case `1+1`, is evaluated and return the output number (2). Notice the line in the second chunk that says `#| echo: false`? This is a code chunk option that indicates not to print the code. In the rendered version, we can see the outcome of `2*2` but not the executed code that created the outcome.
+
+The table below show some of the options available to customizing outputs ([Quarto.org](https://quarto.org/docs/computations/execution-options.html)).
+
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+|                       | Code chunk options                                                                                                                          |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Option                | Description                                                                                                                                 |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| eval:`            | Evaluate the code chunk (if `false`, just echos the code into the output).                                                                  |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| echo:`            | Include the source code in output                                                                                                           |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| warning:`         | Include warnings in the output.                                                                                                             |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| error:`           | Include warnings in the output.                                                                                                             |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| include:`         | Catch all for preventing any output (code or results) from being included (e.g.`include: false` suppresses all output from the code block). |
++-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+
+Note that you can also combine these options by adding more than one to a code chunk.
+
+## **Adding citations**
+
+To add a citation, go to the visual editor and in the insert drop down, select “Citation.” In the window that appears, there are several options in the left hand panel for the source of your citation. If you have a citation manager, such as Zotero, installed, this would be included in that list. For now, select “From DOI”, and in the search bar enter a DOI of your choice (e.g.: 10.1038/s41467-020-17726-z), then select “Insert.”
+
+After selecting insert, a couple of things happen. First, the citation reference is inserted into your markdown text as `[@oke2020]`. Second, a file called references.bib containing the BibTex format of the citation is created. Third, that file is added to the YAML header of your Quarto document (`bibliography: references.bib`). Adding another citation will automatically update your `references.bib` file. So easy!
+
+Every time when opening a new Quarto document we should start by deleting all template text (everything except for the YAML). Then we save the document into the most convenient folder of our project. Now we are ready to start our work.
+
+You can create a new chunk in your Quarto in one of these ways:
+
+-   Go to Code in the top menu bar, click “Insert Chunk”
+
+-   Type by hand `{r}`
+
+-   Use the keyboard shortcut
+
+    -   Mac:`command` + `option` + `i`
+
+    -   Windows: `Ctrl` + `Alt` + `i`
+
+### **About code chunks**
+
+Each code chunk needs to have an opening syntax \`\`\``{r}` and a closing syntax \`\`\`. Everything in between these lines will be identified as R code. Let’s start by creating a new R chunk and run the following functions. Because this just an exploration and we do not want this chunk to be part of our report, we will indicate that by adding `#|eval: false` and `#| echo: false` in the setup of the chunk, that way, the code in this chunk will not run and not be displayed when I knit the final document.
+
+**Best Practice**
+
+It is generally good practice to include all of your `library()` calls in a single, dedicated R chunk near the top of your document. This lets collaborators know what packages they might need to install before they start running your code.
+
+## **Additional Quarto Resources**
+
+-   Posit (the organization that developed Quarto) has great documentation, check out [Quarto.org](https://quarto.org/)
+
+-   R for Data Science (2e) (Wickham et al, 2023), this is an awesome book for all R related things. Chapter [29 and 30](https://r4ds.hadley.nz/quarto.html) are specific to Quarto.
+
+-   [Quarto Gallery:](https://quarto.org/docs/gallery/) Example of different outputs created using Quarto
+
+-   [Hello Quarto: share, collaborate, teach, reimagine](https://openscapes.org/blog/2022-08-10-quarto-keynote/). A talk by Julia Stewart Lowndes and Mine Cetinkaya-Runde.
+
+## **Git Resources**
+
+-   [Pro Git Book](https://git-scm.com/book/en/v2)
+
+-   [Happy Git and GitHub for the useR](https://happygitwithr.com/)
+
+-   [GitHub Documentation](https://docs.github.com/en/get-started/quickstart/set-up-git)
+
+-   [Learn Git Branching](https://learngitbranching.js.org/) is an interactive tool to learn Git on the command line
+
+-   [Software Carpentry Version Control with Git](https://swcarpentry.github.io/git-novice/)
+
+-   Bitbucket’s tutorials on [Git Workflows](https://www.atlassian.com/git/tutorials/comparing-workflows)
