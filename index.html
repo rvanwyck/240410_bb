@@ -113,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
 <p>First, ensure that Git is indeed installed on your computer. You can do this by trying to run <code>git --version</code> in your terminal or command prompt. If Git is installed, this command will return the version of Git you have installed.</p>
 <h2 id="install-git" class="anchored">Install Git</h2>
 <p>If Git is not installed, you’ll need to download and install it. You can download Git from <a href="https://git-scm.com">git-scm.com</a>. During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.</p>
-<p>Are you getting any errors? <a href="~/training_rkvanwyck/240410_bb/240410_brown_bag.html">Setting the Path to Git Manually</a></p>
+<p>Are you getting any errors? <a href="https://rvanwyck.github.io/240410_bb/240410_brown_bag.html">Setting the Path to Git Manually</a></p>
 </blockquote>
 </section>
 <section id="what-exactly-are-git-and-github" class="level3">
@@ -201,10 +201,10 @@ What should I write in my commit message?</strong></p>
 <section id="configuring-git" class="level2">
 <h2 class="anchored" data-anchor-id="configuring-git">Configuring Git</h2>
 <p>Let’s start by adding your user name to the global options. Type the following into the command prompt, with your exact GitHub username, and press enter:</p>
-<p><code>yfr ## git config --global user.name "my_user_name"}</code></p>
+<p><code>rwy ## git config --global user.name "my_user_name"}</code></p>
 <p>Note that if the code ran successfully, it will look like nothing happened. We will check at the end to make sure it worked.</p>
 <p>Next, enter the following line, with the email address you used when you created your account on <a href="www.github.com">github.com</a>:</p>
-<p><code>yfr ## git config --global user.email "my_email@alaska.edu"}</code></p>
+<p><code>rwy ## git config --global user.email "my_email@alaska.edu"}</code></p>
 </section>
 </section>
 <section id="setting-up-git-credentials" class="level1">
@@ -213,9 +213,9 @@ What should I write in my commit message?</strong></p>
 <section id="when-setting-up-git-and-github-on-your-personal-computer" class="level2">
 <h2 class="anchored" data-anchor-id="when-setting-up-git-and-github-on-your-personal-computer">When Setting up Git and GitHub on Your Personal Computer</h2>
 <p>You will not need to run the <code>git config</code> line below to set the cache. This is a specific configuration for the RStudio Server we are working on.</p>
-<p><code>yfr ## git config --global credential.helper 'cache --timeout=10000000'}</code></p>
+<p><code>rwy ## git config --global credential.helper 'cache --timeout=10000000'}</code></p>
 <p>Next, we will set the default branch name to <code>main</code> for any new repositories that are created moving forward. Why are we doing this? Previously, the default branch name was <code>master</code> and this racist terminology for Git branches motivates us to update our default branch to <code>main</code> instead.</p>
-<p><code>yfr ## git config --global init.defaultBranch main}</code></p>
+<p><code>rwy ## git config --global init.defaultBranch main}</code></p>
 <p>Finally, check to make sure everything looks correct by entering this command, which will return the global options you have set.</p>
 <pre class="{r} ## git config --global --list}"><code></code></pre>
 </section>
@@ -434,8 +434,6 @@ When working on projects with a small team or single developer with direct write
 </section>
 <section id="set-up-a-quarto-document" class="level1">
 <h1>Set up a Quarto Document:</h1>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">** Setup**</h2>
 <ul>
 <li><p>Open a new Quarto file using the following prompts: File &gt; New File &gt; Quarto Document</p></li>
 <li><p>A popup window will appear.</p></li>
@@ -444,7 +442,6 @@ When working on projects with a small team or single developer with direct write
 <li><p>Then click the “Create” button.</p></li>
 </ul>
 <p>The first thing to notice is that by opening a file, we see the fourth pane of the RStudio pops up. This is our Quarto document which is essentially a text editor. We also see in the upper left side that we are looking at the document under the “Visual editor”. This is probably a familiar way of looking at a text document. To introduce the <strong>markdown</strong> syntax, we re going to move to the source editor and then come back to the visual editor. In the upper left corner, click on Source. See how the formatting changed? In the Source editor we are looking at the same text, but in markdown syntax. The visual editor on the other hand, allows us to see how markdown is rendered, therefore how is it going to look in our output document.</p>
-</section>
 <section id="render-the-quarto-document" class="level2">
 <h2 class="anchored" data-anchor-id="render-the-quarto-document">Render the Quarto document</h2>
 <p>Let’s go ahead and render this file by clicking the “Render” button, next to the blue arrow at the top of the Quarto file. When you first click this button, RStudio will prompt you to save this file. Save it in the top level of your home directory on the server, and name it something that you will remember (like <code>quarto-intro.Rmd</code>).</p>

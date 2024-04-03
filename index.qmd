@@ -70,7 +70,7 @@ The version control system we’ll be diving into is Git, the most widely used m
 >
 > If Git is not installed, you'll need to download and install it. You can download Git from [git-scm.com](https://git-scm.com). During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.
 >
-> Are you getting any errors? [Setting the Path to Git Manually](~/training_rkvanwyck/240410_bb/240410_brown_bag.html)
+> Are you getting any errors? [Setting the Path to Git Manually](https://rvanwyck.github.io/240410_bb/240410_brown_bag.html)
 
 ### **What *exactly* are Git and GitHub?**
 
@@ -423,8 +423,6 @@ Directory organization will vary from project to project, but the ultimate goal 
 ![](240410_brown_bag_files/rproj-basic-organization.png){width="533"}
 
 # Set up a Quarto Document:
-
-## \*\* Setup\*\*
 
 -   Open a new Quarto file using the following prompts: File \> New File \> Quarto Document
 
