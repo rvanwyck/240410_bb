@@ -98,7 +98,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>The version control system we’ll be diving into is Git, the most widely used modern version control system in the world.</p>
 <section id="with-git-we-can-enhance-our-workflow" class="level4">
-<h4 class="anchored">With Git we can enhance our workflow:</h4>
+<h4 class="anchored" data-anchor-id="with-git-we-can-enhance-our-workflow">With Git we can enhance our workflow:</h4>
 <ul>
 <li><p><strong>Eliminate</strong> the need for <strong>cryptic filenames</strong> and comments to track our work.</p></li>
 <li><p>Provide <strong>detailed descriptions of our changes</strong> through commits, making it easier to understand the reasons behind code modifications.</p></li>
@@ -107,15 +107,52 @@ ul.task-list li input[type="checkbox"] {
 <li><p><strong>Assign meaningful tags</strong> to specific versions of our code.</p></li>
 <li><p>Additionally, Git offers a powerful distributed feature. <strong>Multiple individuals can work on the same analysis concurrently</strong> on their own computers, with the ability to merge everyone’s changes together.</p></li>
 </ul>
+</section>
+</section>
+<section id="but-before-we-dive-into-git-and-github" class="level1">
+<h1>But Before we dive into Git and GitHub…</h1>
+<section id="in-summary" class="level2">
+<h2 class="anchored" data-anchor-id="in-summary">In Summary:</h2>
+<p>Working in a reproducible manner:</p>
+<ul>
+<li><p>Increases research efficiency, accelerating the pace of your research and collaborations.</p></li>
+<li><p>Provides transparency by capturing and communicating scientific workflows.</p></li>
+<li><p>Enables research to stand on the shoulders of giants (build on work that came before).</p></li>
+<li><p>Allows credit for secondary usage and supports easy attribution.</p></li>
+<li><p>Increases trust in science.</p></li>
+</ul>
+<p>To enable others to fully interpret, reproduce or build upon our research, we need to provide more comprehensive information than is typically included in a figure or publication. The <strong>methods sections of papers are typically inadequate to fully reproduce the work described in the paper</strong>.</p>
+<p><strong>Computational reproducibility</strong> is the ability to document data, analyses, and models sufficiently for other researchers to be able to understand and ideally re-execute the computations that led to scientific results and conclusions.</p>
+<p>Practically speaking, reproducibility includes:</p>
+<ul>
+<li><p>Preserving the data</p></li>
+<li><p>Preserving the software workflow</p></li>
+<li><p>Documenting what you did</p></li>
+<li><p>Describing how to interpret it all</p></li>
+</ul>
+<p>A recent study of publicly-available datasets in the Harvard Database repository containing R files found that only 26% of R files ran without error in the initial execution. 44% were able to be run after code cleaning, showing the importance of good programming practice (<a href="https://learning.nceas.ucsb.edu/2024-02-arctic/session_20.html#ref-trisovic2022">Trisovic et al.&nbsp;2022</a>). The figure below from Trisovic et al.&nbsp;shows a <em>sankey diagram</em> of how code cleaning was able to fix common errors.</p>
+<p><img src="240410_brown_bag_files/code-reproducibility-trisovic.png" class="img-fluid" width="880"></p>
+</section>
+</section>
+<section id="computational-provenance-and-workflows" class="level1">
+<h1><strong>Computational Provenance and Workflows</strong></h1>
+<p>Computational provenance refers to the origin and processing history of data including:</p>
+<ul>
+<li><p>Input data</p></li>
+<li><p>Workflow/scripts</p></li>
+<li><p>Output data</p></li>
+<li><p>Figures</p></li>
+<li><p>Methods, dataflow, and dependencies</p></li>
+</ul>
+<p>When we put these all together with formal documentation, we create a <strong>computational workflow</strong> that captures all of the steps from initial data cleaning and integration, through analysis, modeling, and visualization. In other words, <strong>computational provenance is a formalized description of a workflow from the origin of the data to it’s final outcome</strong>.</p>
+<p>Here’s an example of a computational workflow from Mark Carls: <a href="https://search.dataone.org/view/urn%3Auuid%3A3249ada0-afe3-4dd6-875e-0f7928a4c171">Mark Carls. Analysis of hydrocarbons following the Exxon Valdez oil spill, Gulf of Alaska, 1989 - 2014. Gulf of Alaska Data Portal. urn:uuid:3249ada0-afe3-4dd6-875e-0f7928a4c171.</a>, that represents a three step workflow comprising four source data files and two output visualizations.Checking and Installing Git</p>
 <blockquote class="blockquote">
-<h1 id="checking-and-installing-git">Checking and Installing Git</h1>
-<h2 id="check-if-git-is-installed" class="anchored" data-anchor-id="with-git-we-can-enhance-our-workflow">Check if Git is Installed</h2>
+<h2 id="check-if-git-is-installed" class="anchored" data-anchor-id="computational-provenance-and-workflows">Check if Git is Installed</h2>
 <p>First, ensure that Git is indeed installed on your computer. You can do this by trying to run <code>git --version</code> in your terminal or command prompt. If Git is installed, this command will return the version of Git you have installed.</p>
 <h2 id="install-git" class="anchored">Install Git</h2>
 <p>If Git is not installed, you’ll need to download and install it. You can download Git from <a href="https://git-scm.com">git-scm.com</a>. During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.</p>
 <p>Are you getting any errors? <a href="240410_brown_bag.html">Setting the Path to Git Manually</a></p>
 </blockquote>
-</section>
 <section id="what-exactly-are-git-and-github" class="level3">
 <h3 class="anchored" data-anchor-id="what-exactly-are-git-and-github"><strong>What <em>exactly</em> are Git and GitHub?</strong></h3>
 <p><img src="240410_brown_bag_files/git-intro.png" class="img-fluid" width="417"></p>
@@ -201,10 +238,10 @@ What should I write in my commit message?</strong></p>
 <section id="configuring-git" class="level2">
 <h2 class="anchored" data-anchor-id="configuring-git">Configuring Git</h2>
 <p>Let’s start by adding your user name to the global options. Type the following into the command prompt, with your exact GitHub username, and press enter:</p>
-<p><code>sne ## git config --global user.name "my_user_name"}</code></p>
+<p><code>{r} ## git config --global user.name "my_user_name"}</code></p>
 <p>Note that if the code ran successfully, it will look like nothing happened. We will check at the end to make sure it worked.</p>
 <p>Next, enter the following line, with the email address you used when you created your account on <a href="www.github.com">github.com</a>:</p>
-<p><code>sne ## git config --global user.email "my_email@alaska.edu"}</code></p>
+<p><code>{r} ## git config --global user.email "my_email@alaska.edu"}</code></p>
 </section>
 </section>
 <section id="setting-up-git-credentials" class="level1">
@@ -213,11 +250,11 @@ What should I write in my commit message?</strong></p>
 <section id="when-setting-up-git-and-github-on-your-personal-computer" class="level2">
 <h2 class="anchored" data-anchor-id="when-setting-up-git-and-github-on-your-personal-computer">When Setting up Git and GitHub on Your Personal Computer</h2>
 <p>You will not need to run the <code>git config</code> line below to set the cache. This is a specific configuration for the RStudio Server we are working on.</p>
-<p><code>sne ## git config --global credential.helper 'cache --timeout=10000000'}</code></p>
+<p><code>{r} ## git config --global credential.helper 'cache --timeout=10000000'}</code></p>
 <p>Next, we will set the default branch name to <code>main</code> for any new repositories that are created moving forward. Why are we doing this? Previously, the default branch name was <code>master</code> and this racist terminology for Git branches motivates us to update our default branch to <code>main</code> instead.</p>
-<p><code>sne ## git config --global init.defaultBranch main}</code></p>
+<p><code>{r} ## git config --global init.defaultBranch main}</code></p>
 <p>Finally, check to make sure everything looks correct by entering this command, which will return the global options you have set.</p>
-<pre class="{r} ## git config --global --list}"><code></code></pre>
+<p><code>{r} ## git config --global --list}</code></p>
 </section>
 <section id="github-authentication" class="level2">
 <h2 class="anchored" data-anchor-id="github-authentication">2.2.2 GitHub Authentication</h2>
@@ -449,8 +486,8 @@ When working on projects with a small team or single developer with direct write
 <p>The table below show some of the options available to customizing outputs (<a href="https://quarto.org/docs/computations/execution-options.html">Quarto.org</a>).</p>
 <table class="table">
 <colgroup>
-<col style="width: 14%">
-<col style="width: 85%">
+<col style="width: 10%">
+<col style="width: 89%">
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -507,6 +544,96 @@ When working on projects with a small team or single developer with direct write
 <p>It is generally good practice to include all of your <code>library()</code> calls in a single, dedicated R chunk near the top of your document. This lets collaborators know what packages they might need to install before they start running your code.</p>
 </section>
 </section>
+</section>
+<section id="reproducible-papers-with-rrtools" class="level1">
+<h1><strong>Reproducible Papers with <code>rrtools</code></strong></h1>
+<p>A great overview of this approach to reproducible papers comes from:</p>
+<blockquote class="blockquote">
+<p>Ben Marwick, Carl Boettiger &amp; Lincoln Mullen (2018) <strong>Packaging Data Analytical Work Reproducibly Using R (and Friends)</strong>, The American Statistician, 72:1, 80-88, <a href="https://doi.org/10.1080/00031305.2017.1375986">doi:10.1080/00031305.2017.1375986</a></p>
+</blockquote>
+<p>The key idea in Marwick et al.&nbsp;(2018) is that of the <em>research compendium</em>: A single container for not just the journal article associated with your research but also the underlying analysis, data, and even the required software environment required to reproduce your work.</p>
+<p>Research compendium makes it easy for researchers to do their work but also for others to inspect or even reproduce the work because all necessary materials are readily at hand due to being kept in one place. Rather than a constrained set of rules, the research compendium is a scaffold upon which to conduct reproducible research using open science tools such as:</p>
+<ul>
+<li><p><a href="https://www.r-project.org/">R</a></p></li>
+<li><p><a href="https://rmarkdown.rstudio.com/">RMarkdown</a></p></li>
+<li><p><a href="https://quarto.org/">Quarto</a></p></li>
+<li><p><a href="https://git-scm.com/">git</a> and <a href="https://github.com/">GitHub</a></p></li>
+</ul>
+<p>Fortunately for us, Ben Marwick (and others) have written an R package called <a href="https://github.com/benmarwick/rrtools">rrtools</a> that helps us create a research compendium from scratch.</p>
+<p>Let’s explore the structure <code>rrtools</code> has put in place for us. Inside the analysis folder we have 5 folders. Different parts of our project will go into this different folders. Our data into the <code>data</code> folder, when the time comes to save any figure, we should save them into the <code>figures</code> folder, and so on.</p>
+<p>You’ll notice a <code>analysis/templates</code> directory that contains journal citation style language (CSL) files which set the style of citations and reference list for the journal (the Journal of Archaeological Science, in this example). The template.Rmd renders into the template.docx. This document is called in the paper.qmd YAML to style the output of the paper created in paper.qmd.</p>
+<p>What if I want a template from another journal, different from the Journal of Archeological Science? We can create other journal’s template with the <code>rticles</code> package. This package will provide the templates and necessary information to render your paper in the journal of your choice (note: not all journal are in the <code>rticles</code> package). With that in mind, we will delete the existing <code>paper</code> directory and create a new one shortly.</p>
+<section id="workflow-in-a-nutshell" class="level3">
+<h3 class="anchored" data-anchor-id="workflow-in-a-nutshell"><strong>Workflow in a nutshell</strong></h3>
+<p>Things we can do with our research compendium:</p>
+<ul>
+<li><p>Edit <code>./analysis/paper/paper.Rmd</code> to begin writing your paper and your analysis in the same document</p></li>
+<li><p>Add any citations to <code>./analysis/paper/pnas-sample.bib</code></p></li>
+<li><p>Add any longer R scripts that don’t fit in your paper in an <code>R</code> folder at the top level</p></li>
+<li><p>Add raw data to <code>./data/raw_data</code></p></li>
+<li><p>Write out any derived data (generated in <code>paper.Rmd</code>) to <code>./data/derived_data</code></p></li>
+<li><p>Write out any figures in <code>./analysis/figures</code></p></li>
+</ul>
+<p>You can then write all of your R code in your RMarkdown/Quarto, and generate your manuscript all in the format needed for your journal (using it’s .csl file, stored in the paper directory).</p>
+</section>
+<section id="adding-renv-to-conserve-your-environment" class="level3">
+<h3 class="anchored" data-anchor-id="adding-renv-to-conserve-your-environment"><strong>Adding <code>renv</code> to conserve your environment</strong></h3>
+<ul>
+<li><p><code>rrtools</code> has a couple more tricks up it’s sleeve to help your compendium be as reproducible and portable as possible.</p></li>
+<li><p>To capture the R packages and versions this project depends on, we can use the <code>renv</code> package.</p></li>
+<li><p>Running <code>renv::init()</code>, will initiate tracking of the R packages in your project.</p></li>
+<li><p>This action will create a new folder called <code>renv</code> in your top directory.</p></li>
+<li><p><code>renv::init()</code> automatically detects dependencies in your code (by looking for library calls, at the DESCRIPTION file, etc.) and installs them to a private project specific library. This means that your project <code>mypaper</code> can use a different version of <code>dplyr</code> than another project which may need an older version without any hassle.</p></li>
+<li><p><code>renv</code> also write the package dependencies to a special file in the repository called <code>renv.lock</code>.</p></li>
+<li><p>If any of your packages you are using is updated, while your are working on your project, you can run <code>renv::snapshot()</code> to update the <code>renv.lock</code> file and your project-installed packages.</p></li>
+<li><p>You can read the <code>renv.lock</code> file using <code>renv::restore()</code>, when needed. This will install the versions of the packages needed.</p></li>
+</ul>
+</section>
+<section id="conserve-your-computational-environement-with-docker" class="level2">
+<h2 class="anchored" data-anchor-id="conserve-your-computational-environement-with-docker"><strong>Conserve your computational environement with Docker</strong></h2>
+<ul>
+<li><p>The <code>rrtools</code> package then uses this <code>renv.lock</code> file to build what is called a Dockerfile.</p></li>
+<li><p><a href="http://www.docker.com/"><strong>Docker</strong></a> <strong>allows you to build containers, a standard unit of software that packages up code and all its dependencies so an application runs quickly and reliably from one computing environment to another.</strong></p></li>
+<li><p>A container is an “image” of all the software specified, and this image can be run on other computers such that the software stack looks exactly as you specify.</p></li>
+<li><p>This is important when it comes to reproducibility, because when running someone else code, you may get different results or errors if you are using different versions of software (like an old version of <code>dplyr</code>).</p></li>
+<li><p>A Dockerfile contains the instructions for how to recreate the computational environment where your analysis was run.</p></li>
+</ul>
+<p><strong>In practice</strong></p>
+<ul>
+<li><p>Once you have your research compendium, you can called <code>rrtools::use_dockerfile()</code>. If needed, re-install <code>rrtools</code> directly from GitHub <code>remotes::install_github("benmarwick/rrtools")</code></p></li>
+<li><p>This, first creates a Dockerfile that loads a standard image for using R with the tidyverse,</p></li>
+<li><p>And then has more instructions for how to create the environment so that it has the very specific R packages and versions you need.</p></li>
+<li><p>If we look at the Dockerfile (example below), it calls to <code>renv::restore()</code>, as described above.</p></li>
+<li><p>The last line of the docker file renders our Quarto/RMarkdown reproducible paper!</p></li>
+</ul>
+<pre><code># get the base image, the rocker/verse has R, RStudio and pandoc FROM rocker/verse:4.2.2  
+# required MAINTAINER Your Name &lt;your_email@somewhere.com&gt;  
+
+COPY . /&lt;REPO&gt; 
+
+# go into the repo directory 
+RUN . /etc/environment \   
+
+# Install linux depedendencies here   
+# e.g. need this for ggforce::geom_sina   
+&amp;&amp; sudo apt-get update \   
+&amp;&amp; sudo apt-get install libudunits2-dev -y \   
+# build this compendium package   
+&amp;&amp; R -e "install.packages('remotes', repos = c(CRAN = 'https://cloud.r-project.org'))" \   
+&amp;&amp; R -e "remotes::install_github(c('rstudio/renv', 'quarto-dev/quarto-r'))" \   
+# install pkgs we need   
+&amp;&amp; R -e "renv::restore()" \   
+# render the manuscript into a docx, you'll need to edit this if you've   
+# customised the location and name of your main qmd file   
+&amp;&amp; R -e "quarto::quarto_render('/&lt;REPO&gt;/analysis/paper/paper.qmd')"</code></pre>
+<ul>
+<li><p>After running <code>rrtools::use_dockerfile()</code>, the package also sets up GitHub Actions for you.</p></li>
+<li><p>Actions are processes that are triggered in GitHub events (like a push) and run automatically.</p></li>
+<li><p>In this case, the Action that is set up will build your Docker image on GitHub.</p></li>
+<li><p>This means that the code that knits your paper is run, and an updated version of your paper is knit.</p></li>
+<li><p>This is called <strong>continuous integration,</strong> and is extremely convenient for developing products like this, since the build step can be taken care of automatically as you push to your repository.</p></li>
+</ul>
+</section>
 <section id="additional-quarto-resources" class="level2">
 <h2 class="anchored" data-anchor-id="additional-quarto-resources"><strong>Additional Quarto Resources</strong></h2>
 <ul>
@@ -524,8 +651,17 @@ When working on projects with a small team or single developer with direct write
 <li><p><a href="https://docs.github.com/en/get-started/quickstart/set-up-git">GitHub Documentation</a></p></li>
 <li><p><a href="https://learngitbranching.js.org/">Learn Git Branching</a> is an interactive tool to learn Git on the command line</p></li>
 <li><p><a href="https://swcarpentry.github.io/git-novice/">Software Carpentry Version Control with Git</a></p></li>
-<li><p>Bitbucket’s tutorials on <a href="https://www.atlassian.com/git/tutorials/comparing-workflows">Git Workflows</a></p></li>
 </ul>
+<p>Bitbucket’s tutorials on <a href="https://www.atlassian.com/git/tutorials/comparing-workflows">Git Workflows</a></p>
+</section>
+<section id="reproducible-research-resources" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-research-resources">Reproducible Research Resources</h2>
+<ul>
+<li><p><a href="https://github.com/benmarwick/rrtools"><code>rrtools</code> documentation</a></p></li>
+<li><p>The <a href="https://github.com/rstudio/rticles%20B"><code>rticles</code></a></p></li>
+<li><p><a href="https://usethis.r-lib.org/"><code>usethis</code> documentation</a></p></li>
+</ul>
+<p>Trisovic, Ana, Matthew K. Lau, Thomas Pasquier, and Mercè Crosas. 2022. “A Large-Scale Study on Research Code Quality and Execution.” <em>Scientific Data</em> 9 (1). <a href="https://doi.org/10.1038/s41597-022-01143-6" class="uri">https://doi.org/10.1038/s41597-022-01143-6</a>.</p>
 </section>
 </section>
 

@@ -60,8 +60,58 @@ The version control system we’ll be diving into is Git, the most widely used m
 
 -   Additionally, Git offers a powerful distributed feature. **Multiple individuals can work on the same analysis concurrently** on their own computers, with the ability to merge everyone’s changes together.
 
-> # Checking and Installing Git
->
+# But Before we dive into Git and GitHub...
+
+## In Summary:
+
+Working in a reproducible manner:
+
+-   Increases research efficiency, accelerating the pace of your research and collaborations.
+
+-   Provides transparency by capturing and communicating scientific workflows.
+
+-   Enables research to stand on the shoulders of giants (build on work that came before).
+
+-   Allows credit for secondary usage and supports easy attribution.
+
+-   Increases trust in science.
+
+To enable others to fully interpret, reproduce or build upon our research, we need to provide more comprehensive information than is typically included in a figure or publication. The **methods sections of papers are typically inadequate to fully reproduce the work described in the paper**.
+
+**Computational reproducibility** is the ability to document data, analyses, and models sufficiently for other researchers to be able to understand and ideally re-execute the computations that led to scientific results and conclusions.
+
+Practically speaking, reproducibility includes:
+
+-   Preserving the data
+
+-   Preserving the software workflow
+
+-   Documenting what you did
+
+-   Describing how to interpret it all
+
+A recent study of publicly-available datasets in the Harvard Database repository containing R files found that only 26% of R files ran without error in the initial execution. 44% were able to be run after code cleaning, showing the importance of good programming practice ([Trisovic et al. 2022](https://learning.nceas.ucsb.edu/2024-02-arctic/session_20.html#ref-trisovic2022)). The figure below from Trisovic et al. shows a *sankey diagram* of how code cleaning was able to fix common errors.
+
+![](240410_brown_bag_files/code-reproducibility-trisovic.png){width="880"}
+
+# **Computational Provenance and Workflows**
+
+Computational provenance refers to the origin and processing history of data including:
+
+-   Input data
+
+-   Workflow/scripts
+
+-   Output data
+
+-   Figures
+
+-   Methods, dataflow, and dependencies
+
+When we put these all together with formal documentation, we create a **computational workflow** that captures all of the steps from initial data cleaning and integration, through analysis, modeling, and visualization. In other words, **computational provenance is a formalized description of a workflow from the origin of the data to it’s final outcome**.
+
+Here’s an example of a computational workflow from Mark Carls: [Mark Carls. Analysis of hydrocarbons following the Exxon Valdez oil spill, Gulf of Alaska, 1989 - 2014. Gulf of Alaska Data Portal. urn:uuid:3249ada0-afe3-4dd6-875e-0f7928a4c171.](https://search.dataone.org/view/urn%3Auuid%3A3249ada0-afe3-4dd6-875e-0f7928a4c171), that represents a three step workflow comprising four source data files and two output visualizations.Checking and Installing Git
+
 > ## Check if Git is Installed
 >
 > First, ensure that Git is indeed installed on your computer. You can do this by trying to run `git --version` in your terminal or command prompt. If Git is installed, this command will return the version of Git you have installed.
@@ -126,7 +176,7 @@ The last step is synchronizing the changes made to our local repository with a r
 
 The processes described in the above sections (i.e. making changes to local working files, recording “snapshots” of them to create a versioned history of changes in a local Git repository, and sending those versions from our local Git repository to a remote repository (which is oftentimes on GitHub)) is illustrated using islands, buildings, bunnies, and packages in the artwork, below:
 
-![Artwork by Allison Horst](240410_brown_bag_files/allison-horst-git-workflow%20(1).png){alt="Artwork by Allison Horst"}
+![Artwork by Allison Horst](240410_brown_bag_files/allison-horst-git-workflow%20(1).png)
 
 > **\
 > What should I write in my commit message?**
@@ -173,15 +223,13 @@ Most of our Git operations will be done in RStudio, but there are some situation
 
 Let’s start by adding your user name to the global options. Type the following into the command prompt, with your exact GitHub username, and press enter:
 
-```{r} ## git config --global user.name "my_user_name"}
-```
+`{r} ## git config --global user.name "my_user_name"}`
 
 Note that if the code ran successfully, it will look like nothing happened. We will check at the end to make sure it worked.
 
 Next, enter the following line, with the email address you used when you created your account on [github.com](www.github.com):
 
-```{r} ## git config --global user.email "my_email@alaska.edu"}
-```
+`{r} ## git config --global user.email "my_email@alaska.edu"}`
 
 # Setting Up Git Credentials
 
@@ -191,18 +239,15 @@ Next, we will set our credentials to not time out for a very long time. This is 
 
 You will not need to run the `git config` line below to set the cache. This is a specific configuration for the RStudio Server we are working on.
 
-```{r} ## git config --global credential.helper 'cache --timeout=10000000'}
-```
+`{r} ## git config --global credential.helper 'cache --timeout=10000000'}`
 
 Next, we will set the default branch name to `main` for any new repositories that are created moving forward. Why are we doing this? Previously, the default branch name was `master` and this racist terminology for Git branches motivates us to update our default branch to `main` instead.
 
-```{r} ## git config --global init.defaultBranch main}
-```
+`{r} ## git config --global init.defaultBranch main}`
 
 Finally, check to make sure everything looks correct by entering this command, which will return the global options you have set.
 
-```{r} ## git config --global --list}
-```
+`{r} ## git config --global --list}`
 
 ## 2.2.2 GitHub Authentication
 
@@ -444,21 +489,21 @@ Notice how the grey **R code chunks** are surrounded by 3 back-ticks and `{r LAB
 
 The table below show some of the options available to customizing outputs ([Quarto.org](https://quarto.org/docs/computations/execution-options.html)).
 
-+-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-|                       | Code chunk options                                                                                                                          |
-+-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| Option                | Description                                                                                                                                 |
-+-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| `#| eval:`            | Evaluate the code chunk (if `false`, just echos the code into the output).                                                                  |
-+-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| `#| echo:`            | Include the source code in output                                                                                                           |
-+-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| `#| warning:`         | Include warnings in the output.                                                                                                             |
-+-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| `#| error:`           | Include warnings in the output.                                                                                                             |
-+-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-| `#| include:`         | Catch all for preventing any output (code or results) from being included (e.g.`include: false` suppresses all output from the code block). |
-+-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+|               | Code chunk options                                                                                                                          |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Option        | Description                                                                                                                                 |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| eval:`    | Evaluate the code chunk (if `false`, just echos the code into the output).                                                                  |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| echo:`    | Include the source code in output                                                                                                           |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| warning:` | Include warnings in the output.                                                                                                             |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| error:`   | Include warnings in the output.                                                                                                             |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| `#| include:` | Catch all for preventing any output (code or results) from being included (e.g.`include: false` suppresses all output from the code block). |
++---------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 
 Note that you can also combine these options by adding more than one to a code chunk.
 
@@ -490,6 +535,125 @@ Each code chunk needs to have an opening syntax \`\`\``{r}` and a closing syntax
 
 It is generally good practice to include all of your `library()` calls in a single, dedicated R chunk near the top of your document. This lets collaborators know what packages they might need to install before they start running your code.
 
+# **Reproducible Papers with `rrtools`**
+
+A great overview of this approach to reproducible papers comes from:
+
+> Ben Marwick, Carl Boettiger & Lincoln Mullen (2018) **Packaging Data Analytical Work Reproducibly Using R (and Friends)**, The American Statistician, 72:1, 80-88, [doi:10.1080/00031305.2017.1375986](https://doi.org/10.1080/00031305.2017.1375986)
+
+The key idea in Marwick et al. (2018) is that of the *research compendium*: A single container for not just the journal article associated with your research but also the underlying analysis, data, and even the required software environment required to reproduce your work.
+
+Research compendium makes it easy for researchers to do their work but also for others to inspect or even reproduce the work because all necessary materials are readily at hand due to being kept in one place. Rather than a constrained set of rules, the research compendium is a scaffold upon which to conduct reproducible research using open science tools such as:
+
+-   [R](https://www.r-project.org/)
+
+-   [RMarkdown](https://rmarkdown.rstudio.com/)
+
+-   [Quarto](https://quarto.org/)
+
+-   [git](https://git-scm.com/) and [GitHub](https://github.com/)
+
+Fortunately for us, Ben Marwick (and others) have written an R package called [rrtools](https://github.com/benmarwick/rrtools) that helps us create a research compendium from scratch.
+
+Let’s explore the structure `rrtools` has put in place for us. Inside the analysis folder we have 5 folders. Different parts of our project will go into this different folders. Our data into the `data` folder, when the time comes to save any figure, we should save them into the `figures` folder, and so on.
+
+You’ll notice a `analysis/templates` directory that contains journal citation style language (CSL) files which set the style of citations and reference list for the journal (the Journal of Archaeological Science, in this example). The template.Rmd renders into the template.docx. This document is called in the paper.qmd YAML to style the output of the paper created in paper.qmd.
+
+What if I want a template from another journal, different from the Journal of Archeological Science? We can create other journal’s template with the `rticles` package. This package will provide the templates and necessary information to render your paper in the journal of your choice (note: not all journal are in the `rticles` package). With that in mind, we will delete the existing `paper` directory and create a new one shortly.
+
+### **Workflow in a nutshell**
+
+Things we can do with our research compendium:
+
+-   Edit `./analysis/paper/paper.Rmd` to begin writing your paper and your analysis in the same document
+
+-   Add any citations to `./analysis/paper/pnas-sample.bib`
+
+-   Add any longer R scripts that don’t fit in your paper in an `R` folder at the top level
+
+-   Add raw data to `./data/raw_data`
+
+-   Write out any derived data (generated in `paper.Rmd`) to `./data/derived_data`
+
+-   Write out any figures in `./analysis/figures`
+
+You can then write all of your R code in your RMarkdown/Quarto, and generate your manuscript all in the format needed for your journal (using it’s .csl file, stored in the paper directory).
+
+### **Adding `renv` to conserve your environment**
+
+-   `rrtools` has a couple more tricks up it’s sleeve to help your compendium be as reproducible and portable as possible.
+
+-   To capture the R packages and versions this project depends on, we can use the `renv` package.
+
+-   Running `renv::init()`, will initiate tracking of the R packages in your project.
+
+-   This action will create a new folder called `renv` in your top directory.
+
+-   `renv::init()` automatically detects dependencies in your code (by looking for library calls, at the DESCRIPTION file, etc.) and installs them to a private project specific library. This means that your project `mypaper` can use a different version of `dplyr` than another project which may need an older version without any hassle.
+
+-   `renv` also write the package dependencies to a special file in the repository called `renv.lock`.
+
+-   If any of your packages you are using is updated, while your are working on your project, you can run `renv::snapshot()` to update the `renv.lock` file and your project-installed packages.
+
+-   You can read the `renv.lock` file using `renv::restore()`, when needed. This will install the versions of the packages needed.
+
+## **Conserve your computational environement with Docker**
+
+-   The `rrtools` package then uses this `renv.lock` file to build what is called a Dockerfile.
+
+-   [**Docker**](http://www.docker.com/) **allows you to build containers, a standard unit of software that packages up code and all its dependencies so an application runs quickly and reliably from one computing environment to another.**
+
+-   A container is an “image” of all the software specified, and this image can be run on other computers such that the software stack looks exactly as you specify.
+
+-   This is important when it comes to reproducibility, because when running someone else code, you may get different results or errors if you are using different versions of software (like an old version of `dplyr`).
+
+-   A Dockerfile contains the instructions for how to recreate the computational environment where your analysis was run.
+
+**In practice**
+
+-   Once you have your research compendium, you can called `rrtools::use_dockerfile()`. If needed, re-install `rrtools` directly from GitHub `remotes::install_github("benmarwick/rrtools")`
+
+-   This, first creates a Dockerfile that loads a standard image for using R with the tidyverse,
+
+-   And then has more instructions for how to create the environment so that it has the very specific R packages and versions you need.
+
+-   If we look at the Dockerfile (example below), it calls to `renv::restore()`, as described above.
+
+-   The last line of the docker file renders our Quarto/RMarkdown reproducible paper!
+
+```         
+# get the base image, the rocker/verse has R, RStudio and pandoc FROM rocker/verse:4.2.2  
+# required MAINTAINER Your Name <your_email@somewhere.com>  
+
+COPY . /<REPO> 
+
+# go into the repo directory 
+RUN . /etc/environment \   
+
+# Install linux depedendencies here   
+# e.g. need this for ggforce::geom_sina   
+&& sudo apt-get update \   
+&& sudo apt-get install libudunits2-dev -y \   
+# build this compendium package   
+&& R -e "install.packages('remotes', repos = c(CRAN = 'https://cloud.r-project.org'))" \   
+&& R -e "remotes::install_github(c('rstudio/renv', 'quarto-dev/quarto-r'))" \   
+# install pkgs we need   
+&& R -e "renv::restore()" \   
+# render the manuscript into a docx, you'll need to edit this if you've   
+# customised the location and name of your main qmd file   
+&& R -e "quarto::quarto_render('/<REPO>/analysis/paper/paper.qmd')"
+```
+
+-   After running `rrtools::use_dockerfile()`, the package also sets up GitHub Actions for you.
+
+-   Actions are processes that are triggered in GitHub events (like a push) and run automatically.
+
+-   In this case, the Action that is set up will build your Docker image on GitHub.
+
+-   This means that the code that knits your paper is run, and an updated version of your paper is knit.
+
+-   This is called **continuous integration,** and is extremely convenient for developing products like this, since the build step can be taken care of automatically as you push to your repository.
+
 ## **Additional Quarto Resources**
 
 -   Posit (the organization that developed Quarto) has great documentation, check out [Quarto.org](https://quarto.org/)
@@ -512,4 +676,14 @@ It is generally good practice to include all of your `library()` calls in a sing
 
 -   [Software Carpentry Version Control with Git](https://swcarpentry.github.io/git-novice/)
 
--   Bitbucket’s tutorials on [Git Workflows](https://www.atlassian.com/git/tutorials/comparing-workflows)
+Bitbucket’s tutorials on [Git Workflows](https://www.atlassian.com/git/tutorials/comparing-workflows)
+
+## Reproducible Research Resources
+
+-   [`rrtools` documentation](https://github.com/benmarwick/rrtools)
+
+-   The [`rticles`](https://github.com/rstudio/rticles%20B)
+
+-   [`usethis` documentation](https://usethis.r-lib.org/)
+
+Trisovic, Ana, Matthew K. Lau, Thomas Pasquier, and Mercè Crosas. 2022. “A Large-Scale Study on Research Code Quality and Execution.” *Scientific Data* 9 (1). <https://doi.org/10.1038/s41597-022-01143-6>.
