@@ -127,8 +127,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="but-before-we-dive-into-git-and-github" class="level1">
 <h1>But Before we dive into Git and GitHub…</h1>
-<section id="in-summary" class="level2">
-<h2 class="anchored" data-anchor-id="in-summary">In Summary:</h2>
+<section id="in-summary-reproducible-research-is" class="level2">
+<h2 class="anchored" data-anchor-id="in-summary-reproducible-research-is">In Summary, Reproducible Research is:</h2>
 <p>Working in a reproducible manner:</p>
 <ul>
 <li><p>Increases research efficiency, accelerating the pace of your research and collaborations.</p></li>
@@ -160,6 +160,8 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Methods, dataflow, and dependencies</p></li>
 </ul>
 <p>When we put these all together with formal documentation, we create a <strong>computational workflow</strong> that captures all of the steps from initial data cleaning and integration, through analysis, modeling, and visualization. In other words, <strong>computational provenance is a formalized description of a workflow from the origin of the data to it’s final outcome</strong>.</p>
+<p>Here’s an example of a computational workflow from Mark Carls: <a href="https://search.dataone.org/view/urn%3Auuid%3A3249ada0-afe3-4dd6-875e-0f7928a4c171">Mark Carls. Analysis of hydrocarbons following the Exxon Valdez oil spill, Gulf of Alaska, 1989 - 2014. Gulf of Alaska Data Portal. urn:uuid:3249ada0-afe3-4dd6-875e-0f7928a4c171.</a>, that represents a three step workflow comprising four source data files and two output visualizations.</p>
+<p><img src="240410_brown_bag_files/comp-workflow-1.png" class="img-fluid" width="920"></p>
 </section>
 </section>
 <section id="now-lets-dive-into-git-and-github" class="level1">
@@ -584,10 +586,24 @@ When working on projects with a small team or single developer with direct write
 </ul>
 <p>Fortunately for us, Ben Marwick (and others) have written an R package called <a href="https://github.com/benmarwick/rrtools">rrtools</a> that helps us create a research compendium from scratch.</p>
 <p>Let’s explore the structure <code>rrtools</code> has put in place for us. Inside the analysis folder we have 5 folders. Different parts of our project will go into this different folders. Our data into the <code>data</code> folder, when the time comes to save any figure, we should save them into the <code>figures</code> folder, and so on.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="240410_brown_bag_files/compendia.png" class="img-fluid figure-img" width="751"></p>
+<figcaption class="figure-caption">Research compendia from Marwick et al.</figcaption>
+</figure>
+</div>
 <p>You’ll notice a <code>analysis/templates</code> directory that contains journal citation style language (CSL) files which set the style of citations and reference list for the journal (the Journal of Archaeological Science, in this example). The template.Rmd renders into the template.docx. This document is called in the paper.qmd YAML to style the output of the paper created in paper.qmd.</p>
 <p>What if I want a template from another journal, different from the Journal of Archeological Science? We can create other journal’s template with the <code>rticles</code> package. This package will provide the templates and necessary information to render your paper in the journal of your choice (note: not all journal are in the <code>rticles</code> package). With that in mind, we will delete the existing <code>paper</code> directory and create a new one shortly.</p>
+<p><strong>Additional information on RMarkdown templates with <code>rticles</code> can be found here <a href="https://learning.nceas.ucsb.edu/2024-02-arctic/session_20.html#rmarkdown-templates-with-rticles" class="uri">https://learning.nceas.ucsb.edu/2024-02-arctic/session_20.html#rmarkdown-templates-with-rticles</a></strong></p>
 <section id="workflow-in-a-nutshell" class="level3">
 <h3 class="anchored" data-anchor-id="workflow-in-a-nutshell"><strong>Workflow in a nutshell</strong></h3>
+<blockquote class="blockquote">
+<p><strong>Summary</strong></p>
+<ul>
+<li><p>Use <code>rrtools</code> to generate the core directory layout and approach to data handling.</p></li>
+<li><p>Then use <code>rticles</code> to create the structure of the paper itself. The combination is incredibly flexible.</p></li>
+</ul>
+</blockquote>
 <p>Things we can do with our research compendium:</p>
 <ul>
 <li><p>Edit <code>./analysis/paper/paper.Rmd</code> to begin writing your paper and your analysis in the same document</p></li>
