@@ -8,7 +8,7 @@
 
 <meta name="author" content="rebecca">
 
-<title>240410 brown bag</title>
+<title>Add Git to PATH Manually</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -46,7 +46,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">240410 brown bag</h1>
+<h1 class="title">Add Git to PATH Manually</h1>
 </div>
 
 
@@ -67,27 +67,9 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="commit---pull---push" class="level1">
-<h1>Commit - Pull - Push</h1>
-<section id="connecting-github-to-rstudio-for-reproducible-research" class="level2">
-<h2 class="anchored" data-anchor-id="connecting-github-to-rstudio-for-reproducible-research">Connecting GitHub to RStudio for Reproducible Research</h2>
-<p><strong>Note:</strong> Brown Bag attendees will learn more from my presentation if they 1) bring their laptop or follow along on Zoom, 2) have <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> loaded already to their machine, and 3) have a <a href="https://github.com/">GitHub</a> account already. Make sure that Git is either installed on your system or the path to the Git executable is added to your system’s PATH environment variable.</p>
-</section>
-</section>
-<section id="checking-and-installing-git" class="level1">
-<h1>Checking and Installing Git</h1>
-<section id="check-if-git-is-installed" class="level2">
-<h2 class="anchored" data-anchor-id="check-if-git-is-installed">Check if Git is Installed</h2>
-<p>First, ensure that Git is indeed installed on your computer. You can do this by trying to run <code>git --version</code> in your terminal or command prompt. If Git is installed, this command will return the version of Git you have installed.</p>
-</section>
-<section id="install-git" class="level2">
-<h2 class="anchored" data-anchor-id="install-git">Install Git</h2>
-<p>If Git is not installed, you’ll need to download and install it. You can download Git from <a href="https://git-scm.com">git-scm.com</a>. During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.</p>
-</section>
-<section id="add-git-to-path-manually" class="level2">
-<h2 class="anchored" data-anchor-id="add-git-to-path-manually">Add Git to PATH Manually</h2>
+<section id="add-git-to-path-manually" class="level1">
+<h1>Add Git to PATH Manually</h1>
 <p>If Git is installed but not recognized, you might need to add Git to your system’s PATH manually. The PATH is an environment variable that lists the directories the operating system should look in for executable files.</p>
-</section>
 </section>
 <section id="git-installation-guide" class="level1">
 <h1>Git Installation Guide</h1>
@@ -155,11 +137,9 @@ ul.task-list li input[type="checkbox"] {
 <p>To configure your global options in Git, especially within the context of R package development, you can use the <strong>‘usethis’</strong> package. The <strong>‘usethis’</strong> package allows you to set personal defaults for various settings. For example, you can specify defaults for your role as a package maintainer or for your preferred license in the <strong>‘.Rprofile’</strong> file.</p>
 <pre class="{r}"><code>options(
   usethis.description = list(
-    `Authors@R` = 'person("Jane", "Doe", email = "jane@example.com")',
-    License = "MIT + file LICENSE"
+    `Authors@R` = 'person("Jane", "Doe", email = "jane@example.com")'
   )
 )</code></pre>
-<p>Git resources Pro Git Book Happy Git and GitHub for the useR GitHub Documentation Learn Git Branching is an interactive tool to learn Git on the command line Software Carpentry Version Control with Git Bitbucket’s tutorials on Git Workflows</p>
 </section>
 </section>
 </section>
