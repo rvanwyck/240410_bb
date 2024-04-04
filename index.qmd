@@ -309,7 +309,7 @@ Congrats! Now you’ve set up your authentication, and you should be able to wor
 
 ------------------------------------------------------------------------
 
-# **Collaborating with a trusted colleagues without conflicts**
+# **Collaborating with trusted colleagues without conflicts**
 
 We start our collaboration by giving a trusted colleague access to our repository on GitHub. In this example, we define the **Owner as the individual who owns the repository**, and the **Collaborator as the person whom the Owner chooses to give permission to make changes to their repository**.
 
