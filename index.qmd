@@ -11,6 +11,14 @@ bibliography: references.bib
 
 **Note:** Brown Bag attendees will learn more from my presentation if they 1) bring their laptop or follow along on Zoom, 2) have [RStudio](https://posit.co/download/rstudio-desktop/) loaded already to their machine, and 3) have a [GitHub](https://github.com/) account already. Make sure that Git is either installed on your system or the path to the Git executable is added to your system's PATH environment variable.
 
+> **OBJECTIVES:**
+>
+> 1.  Participants will understand that revision control supports reproducible and replaceable research
+>
+> 2.  Participants will become familiar with a RStudio \<-\> GitHub workflow for revision control
+>
+> 3.  (if time) Participants will participate in a code conflict resolution exercise
+
 > **Subnote on YAML:**
 >
 > YAML Is the document’s metadata which sets guidelines on how your want the output of your document to look like. It is located at the top of your file, delineated by three dashes (`---`) at the top and at the bottom of it. It can be used to specify:
