@@ -11,6 +11,7 @@ bibliography: references.bib
 
 **Note:** Brown Bag attendees will learn more from my presentation if they 1) bring their laptop or follow along on Zoom, 2) have [RStudio](https://posit.co/download/rstudio-desktop/) loaded already to their machine, and 3) make sure that Git is either installed on your machine and the path to the Git executable is added to your system's PATH environment variable.
 
+> ::: callout-important
 > **OBJECTIVES:**
 >
 > 1.  Participants will understand that revision control supports reproducible and replaceable research
@@ -18,7 +19,9 @@ bibliography: references.bib
 > 2.  Participants will become familiar with a RStudio \<-\> GitHub workflow for revision control
 >
 > 3.  (if time) Participants will participate in a code conflict resolution exercise
+> :::
 
+> ::: callout-note
 > **Subnote on YAML:**
 >
 > YAML Is the document’s metadata which sets guidelines on how your want the output of your document to look like. It is located at the top of your file, delineated by three dashes (`---`) at the top and at the bottom of it. It can be used to specify:
@@ -30,6 +33,7 @@ bibliography: references.bib
 > -   Add additional information such as the bibliography file (and formatting of the references)
 >
 > -   Specific parameters for your report (eg: just used a subset of the data).
+> :::
 
 ------------------------------------------------------------------------
 
@@ -143,6 +147,7 @@ Here’s an example of a computational workflow from Mark Carls: [Mark Carls. An
 
 ------------------------------------------------------------------------
 
+> ::: callout-caution
 > ## Check if Git is Installed
 >
 > First, ensure that Git is indeed installed on your computer. You can do this by trying to run `git --version` in your terminal or command prompt. If Git is installed, this command will return the version of Git you have installed.
@@ -152,6 +157,7 @@ Here’s an example of a computational workflow from Mark Carls: [Mark Carls. An
 > If Git is not installed, you'll need to download and install it. You can download Git from [git-scm.com](https://git-scm.com). During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.
 >
 > Are you getting any errors? [Setting the Path to Git Manually](240410_brown_bag.html)
+> :::
 
 ------------------------------------------------------------------------
 
@@ -258,13 +264,17 @@ Most of our Git operations will be done in RStudio, but there are some situation
 
 Let’s start by adding your user name to the global options. Type the following into the command prompt, with your exact GitHub username, and press enter:
 
-`{r} ## git config --global user.name "my_user_name"}`
+```         
+git config --global user.name "my_user_name"}
+```
 
 Note that if the code ran successfully, it will look like nothing happened. We will check at the end to make sure it worked.
 
 Next, enter the following line, with the email address you used when you created your account on [github.com](www.github.com):
 
-`{r} ## git config --global user.email "my_email@alaska.edu"}`
+```         
+git config --global user.email "my_email@alaska.edu"
+```
 
 # Setting Up Git Credentials
 
@@ -274,15 +284,21 @@ Next, we will set our credentials to not time out for a very long time. This is 
 
 You will not need to run the `git config` line below to set the cache. This is a specific configuration for the RStudio Server we are working on.
 
-`{r} ## git config --global credential.helper 'cache --timeout=10000000'}`
+```         
+git config --global credential.helper 'cache --timeout=10000000'}
+```
 
 Next, we will set the default branch name to `main` for any new repositories that are created moving forward. Why are we doing this? Previously, the default branch name was `master` and this racist terminology for Git branches motivates us to update our default branch to `main` instead.
 
-`{r} ## git config --global init.defaultBranch main}`
+```         
+git config --global init.defaultBranch main}
+```
 
 Finally, check to make sure everything looks correct by entering this command, which will return the global options you have set.
 
-`{r} ## git config --global --list}`
+```         
+git config --global --list
+```
 
 ## 2.2.2 GitHub Authentication
 
@@ -305,6 +321,7 @@ Congrats! Now you’ve set up your authentication, and you should be able to wor
 
 > **Note:** For better security and long term use, we recommend taking the extra steps to set up SSH keys (check out Chapter 10 Set up Keys for SSH in the book *Happy Git and GitHub for the useR*).
 
+> ::: callout-warning
 > **Git configuration to surpress warning messages**
 >
 > Git version 2.27 includes a new feature that allows users to specify the default method for integrating changes from a remote repository into a local repository, without receiving a warning (this warning is informative, but can get annoying). To suppress this warning *for this repository only* we need to configure Git by running this line of code in the Terminal:
@@ -314,6 +331,7 @@ Congrats! Now you’ve set up your authentication, and you should be able to wor
 > ```
 >
 > `pull.rebase false` is a default strategy for pulling where Git will first try to auto-merge the files. If auto-merging is not possible, it will indicate a merge conflict.
+> :::
 
 ------------------------------------------------------------------------
 
@@ -339,9 +357,11 @@ In order to contribute, the Collaborator must **clone** the repository from the 
 
 Let's bring a copy of this remote repository down to our local computer (aka **clone** this repository) so that we can work comfortably in RStudio.
 
+> ::: callout-tip
 > **An important distinction**
 >
 > We refer to the **remote copy** of the repository that is on GitHub as the **origin repository** (the one that we cloned from), and the copy on our local computer as the **local repository**.
+> :::
 
 Start by clicking the green **Code** button (top right of your file listing) and copying the URL to your clipboard (this URL represents the repository location):
 
@@ -383,11 +403,13 @@ Once you click **Create Project**, a new RStudio window will open with all of th
 >
 > If this file is currently untracked by Git, it should appear in my **Git** tab. Once I add it to the `.gitignore` *and* save the modified `.gitignore` file, you should see `contains_sensitive_info.R` disappear from the **Git** tab, and a modified `.gitignore` (denoted by a blue **M**) appear. Stage/commit/push this modified `.gitignore` file.
 
+::: callout-tip
 **Why do I need to add and commit files *before* pulling?**
 
 > Remember, `git pull` is a combination of `git fetch`ing remote changes to your local repo and `git merge`ing those changes from your local repo into your local working file(s).
 >
 > The **merge** part of `git pull` will fail if you have uncommitted changes in your local working file(s) to avoid any potential overwriting of your own changes. Because of this, you should always, add/commit *then* pull, *and finally* push.
+:::
 
 ## **A Note on Advanced Collaboration Techniques**
 
@@ -578,7 +600,9 @@ It is generally good practice to include all of your `library()` calls in a sing
 
 A great overview of this approach to reproducible papers comes from:
 
+> ::: callout-note
 > Ben Marwick, Carl Boettiger & Lincoln Mullen (2018) **Packaging Data Analytical Work Reproducibly Using R (and Friends)**, The American Statistician, 72:1, 80-88, [doi:10.1080/00031305.2017.1375986](https://doi.org/10.1080/00031305.2017.1375986)
+> :::
 
 The key idea in Marwick et al. (2018) is that of the *research compendium*: A single container for not just the journal article associated with your research but also the underlying analysis, data, and even the required software environment required to reproduce your work.
 
@@ -606,11 +630,13 @@ What if I want a template from another journal, different from the Journal of Ar
 
 ### **Workflow in a nutshell**
 
+> ::: callout-tip
 > **Summary**
 >
 > -   Use `rrtools` to generate the core directory layout and approach to data handling.
 >
 > -   Then use `rticles` to create the structure of the paper itself. The combination is incredibly flexible.
+> :::
 
 Things we can do with our research compendium:
 
