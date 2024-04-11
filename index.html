@@ -72,7 +72,6 @@ ul.task-list li input[type="checkbox"] {
 <section id="connecting-github-to-rstudio-for-reproducible-research" class="level2">
 <h2 class="anchored" data-anchor-id="connecting-github-to-rstudio-for-reproducible-research">Connecting GitHub to RStudio for Reproducible Research</h2>
 <p><strong>Note:</strong> Brown Bag attendees will learn more from my presentation if they 1) bring their laptop or follow along on Zoom, 2) have <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> loaded already to their machine, and 3) make sure that Git is either installed on your machine and the path to the Git executable is added to your system’s PATH environment variable.</p>
-<blockquote class="blockquote">
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -91,8 +90,6 @@ Important
 </ol>
 </div>
 </div>
-</blockquote>
-<blockquote class="blockquote">
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -113,7 +110,6 @@ Note
 </ul>
 </div>
 </div>
-</blockquote>
 <hr>
 <blockquote class="blockquote">
 <p>The information in this presentation was shamelessly taken from the February, 2024 materials from the Arctic Data Center training; <a href="https://learning.nceas.ucsb.edu/2024-02-arctic/">Reproducible Approaches to Arctic Research Using R</a></p>
@@ -199,8 +195,7 @@ Note
 <section id="now-lets-dive-into-git-and-github" class="level1">
 <h1>NOW Let’s dive into Git and GitHub:</h1>
 <hr>
-<blockquote class="blockquote">
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -211,12 +206,13 @@ Check if Git is Installed
 </div>
 <div class="callout-body-container callout-body">
 <p>First, ensure that Git is indeed installed on your computer. You can do this by trying to run <code>git --version</code> in your terminal or command prompt. If Git is installed, this command will return the version of Git you have installed.</p>
-<h2 id="install-git" class="anchored" data-anchor-id="now-lets-dive-into-git-and-github">Install Git</h2>
+<section id="install-git" class="level2">
+<h2 class="anchored" data-anchor-id="install-git">Install Git</h2>
 <p>If Git is not installed, you’ll need to download and install it. You can download Git from <a href="https://git-scm.com">git-scm.com</a>. During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.</p>
 <p>Are you getting any errors? <a href="240410_brown_bag.html">Setting the Path to Git Manually</a></p>
+</section>
 </div>
 </div>
-</blockquote>
 <hr>
 <section id="what-exactly-are-git-and-github" class="level3">
 <h3 class="anchored" data-anchor-id="what-exactly-are-git-and-github"><strong>What <em>exactly</em> are Git and GitHub?</strong></h3>
@@ -341,7 +337,6 @@ What should I write in my commit message?</strong></p>
 <blockquote class="blockquote">
 <p><strong>Note:</strong> For better security and long term use, we recommend taking the extra steps to set up SSH keys (check out Chapter 10 Set up Keys for SSH in the book <em>Happy Git and GitHub for the useR</em>).</p>
 </blockquote>
-<blockquote class="blockquote">
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -358,7 +353,6 @@ Warning
 <p><code>pull.rebase false</code> is a default strategy for pulling where Git will first try to auto-merge the files. If auto-merging is not possible, it will indicate a merge conflict.</p>
 </div>
 </div>
-</blockquote>
 <hr>
 </section>
 </section>
@@ -381,14 +375,13 @@ Warning
 <section id="clone-your-repository-and-use-git-locally-in-rstudio" class="level1">
 <h1><strong><code>clone</code> your repository and use Git locally in RStudio</strong></h1>
 <p>Let’s bring a copy of this remote repository down to our local computer (aka&nbsp;<strong>clone</strong>&nbsp;this repository) so that we can work comfortably in RStudio.</p>
-<blockquote class="blockquote">
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -396,7 +389,6 @@ Tip
 <p>We refer to the <strong>remote copy</strong> of the repository that is on GitHub as the <strong>origin repository</strong> (the one that we cloned from), and the copy on our local computer as the <strong>local repository</strong>.</p>
 </div>
 </div>
-</blockquote>
 <p>Start by clicking the green <strong>Code</strong> button (top right of your file listing) and copying the URL to your clipboard (this URL represents the repository location):</p>
 <p><img src="240410_brown_bag_files/github-test-clone-url.png" class="img-fluid" width="646"></p>
 <blockquote class="blockquote">
@@ -652,7 +644,6 @@ When working on projects with a small team or single developer with direct write
 <section id="reproducible-papers-with-rrtools" class="level1">
 <h1><strong>Reproducible Papers with <code>rrtools</code></strong></h1>
 <p>A great overview of this approach to reproducible papers comes from:</p>
-<blockquote class="blockquote">
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -666,7 +657,6 @@ Note
 <p>Ben Marwick, Carl Boettiger &amp; Lincoln Mullen (2018) <strong>Packaging Data Analytical Work Reproducibly Using R (and Friends)</strong>, The American Statistician, 72:1, 80-88, <a href="https://doi.org/10.1080/00031305.2017.1375986">doi:10.1080/00031305.2017.1375986</a></p>
 </div>
 </div>
-</blockquote>
 <p>The key idea in Marwick et al.&nbsp;(2018) is that of the <em>research compendium</em>: A single container for not just the journal article associated with your research but also the underlying analysis, data, and even the required software environment required to reproduce your work.</p>
 <p>Research compendium makes it easy for researchers to do their work but also for others to inspect or even reproduce the work because all necessary materials are readily at hand due to being kept in one place. Rather than a constrained set of rules, the research compendium is a scaffold upon which to conduct reproducible research using open science tools such as:</p>
 <ul>
@@ -688,14 +678,13 @@ Note
 <p><strong>Additional information on RMarkdown templates with <code>rticles</code> can be found here <a href="https://learning.nceas.ucsb.edu/2024-02-arctic/session_20.html#rmarkdown-templates-with-rticles" class="uri">https://learning.nceas.ucsb.edu/2024-02-arctic/session_20.html#rmarkdown-templates-with-rticles</a></strong></p>
 <section id="workflow-in-a-nutshell" class="level3">
 <h3 class="anchored" data-anchor-id="workflow-in-a-nutshell"><strong>Workflow in a nutshell</strong></h3>
-<blockquote class="blockquote">
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -706,7 +695,6 @@ Tip
 </ul>
 </div>
 </div>
-</blockquote>
 <p>Things we can do with our research compendium:</p>
 <ul>
 <li><p>Edit <code>./analysis/paper/paper.Rmd</code> to begin writing your paper and your analysis in the same document</p></li>
@@ -783,7 +771,7 @@ RUN . /etc/environment \
 <p>-Rebecca</p>
 <hr>
 <section id="additional-quarto-resources" class="level2">
-<h2 class="anchored" data-anchor-id="additional-quarto-resources"><strong>Additional Quarto Resources</strong></h2>
+<h2 class="anchored" data-anchor-id="additional-quarto-resources">Additional Quarto Resources:</h2>
 <ul>
 <li><p>Posit (the organization that developed Quarto) has great documentation, check out <a href="https://quarto.org/">Quarto.org</a></p></li>
 <li><p>R for Data Science (2e) (Wickham et al, 2023), this is an awesome book for all R related things. Chapter <a href="https://r4ds.hadley.nz/quarto.html">29 and 30</a> are specific to Quarto.</p></li>
@@ -792,7 +780,7 @@ RUN . /etc/environment \
 </ul>
 </section>
 <section id="git-resources" class="level2">
-<h2 class="anchored" data-anchor-id="git-resources"><strong>Git Resources</strong></h2>
+<h2 class="anchored" data-anchor-id="git-resources">Git Resources:</h2>
 <ul>
 <li><p><a href="https://git-scm.com/book/en/v2">Pro Git Book</a></p></li>
 <li><p><a href="https://happygitwithr.com/">Happy Git and GitHub for the useR</a></p></li>
@@ -803,7 +791,7 @@ RUN . /etc/environment \
 <p>Bitbucket’s tutorials on <a href="https://www.atlassian.com/git/tutorials/comparing-workflows">Git Workflows</a></p>
 </section>
 <section id="reproducible-research-resources" class="level2">
-<h2 class="anchored" data-anchor-id="reproducible-research-resources">Reproducible Research Resources</h2>
+<h2 class="anchored" data-anchor-id="reproducible-research-resources">Reproducible Research Resources:</h2>
 <ul>
 <li><p><a href="https://github.com/benmarwick/rrtools"><code>rrtools</code> documentation</a></p></li>
 <li><p>The <a href="https://github.com/rstudio/rticles%20B"><code>rticles</code></a></p></li>

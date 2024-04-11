@@ -11,29 +11,29 @@ bibliography: references.bib
 
 **Note:** Brown Bag attendees will learn more from my presentation if they 1) bring their laptop or follow along on Zoom, 2) have [RStudio](https://posit.co/download/rstudio-desktop/) loaded already to their machine, and 3) make sure that Git is either installed on your machine and the path to the Git executable is added to your system's PATH environment variable.
 
-> ::: callout-important
-> **OBJECTIVES:**
->
-> 1.  Participants will understand that revision control supports reproducible and replaceable research
->
-> 2.  Participants will become familiar with a RStudio \<-\> GitHub workflow for revision control
->
-> 3.  (if time) Participants will participate in a code conflict resolution exercise
-> :::
+::: callout-important
+**OBJECTIVES:**
 
-> ::: callout-note
-> **Subnote on YAML:**
->
-> YAML Is the document’s metadata which sets guidelines on how your want the output of your document to look like. It is located at the top of your file, delineated by three dashes (`---`) at the top and at the bottom of it. It can be used to specify:
->
-> -   Characteristics of your documents such at title, author, date of creation.
->
-> -   Argument to pass on the building process to control the format of the output.
->
-> -   Add additional information such as the bibliography file (and formatting of the references)
->
-> -   Specific parameters for your report (eg: just used a subset of the data).
-> :::
+1.  Participants will understand that revision control supports reproducible and replaceable research
+
+2.  Participants will become familiar with a RStudio \<-\> GitHub workflow for revision control
+
+3.  (if time) Participants will participate in a code conflict resolution exercise
+:::
+
+::: callout-note
+**Subnote on YAML:**
+
+YAML Is the document’s metadata which sets guidelines on how your want the output of your document to look like. It is located at the top of your file, delineated by three dashes (`---`) at the top and at the bottom of it. It can be used to specify:
+
+-   Characteristics of your documents such at title, author, date of creation.
+
+-   Argument to pass on the building process to control the format of the output.
+
+-   Add additional information such as the bibliography file (and formatting of the references)
+
+-   Specific parameters for your report (eg: just used a subset of the data).
+:::
 
 ------------------------------------------------------------------------
 
@@ -147,17 +147,17 @@ Here’s an example of a computational workflow from Mark Carls: [Mark Carls. An
 
 ------------------------------------------------------------------------
 
-> ::: callout-caution
-> ## Check if Git is Installed
->
-> First, ensure that Git is indeed installed on your computer. You can do this by trying to run `git --version` in your terminal or command prompt. If Git is installed, this command will return the version of Git you have installed.
->
-> ## Install Git
->
-> If Git is not installed, you'll need to download and install it. You can download Git from [git-scm.com](https://git-scm.com). During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.
->
-> Are you getting any errors? [Setting the Path to Git Manually](240410_brown_bag.html)
-> :::
+::: callout-important
+## Check if Git is Installed
+
+First, ensure that Git is indeed installed on your computer. You can do this by trying to run `git --version` in your terminal or command prompt. If Git is installed, this command will return the version of Git you have installed.
+
+## Install Git
+
+If Git is not installed, you'll need to download and install it. You can download Git from [git-scm.com](https://git-scm.com). During the installation process, there is an option to add Git to your PATH. Make sure this option is selected.
+
+Are you getting any errors? [Setting the Path to Git Manually](240410_brown_bag.html)
+:::
 
 ------------------------------------------------------------------------
 
@@ -321,17 +321,17 @@ Congrats! Now you’ve set up your authentication, and you should be able to wor
 
 > **Note:** For better security and long term use, we recommend taking the extra steps to set up SSH keys (check out Chapter 10 Set up Keys for SSH in the book *Happy Git and GitHub for the useR*).
 
-> ::: callout-warning
-> **Git configuration to surpress warning messages**
->
-> Git version 2.27 includes a new feature that allows users to specify the default method for integrating changes from a remote repository into a local repository, without receiving a warning (this warning is informative, but can get annoying). To suppress this warning *for this repository only* we need to configure Git by running this line of code in the Terminal:
->
-> ```         
-> git config pull.rebase false
-> ```
->
-> `pull.rebase false` is a default strategy for pulling where Git will first try to auto-merge the files. If auto-merging is not possible, it will indicate a merge conflict.
-> :::
+::: callout-warning
+**Git configuration to surpress warning messages**
+
+Git version 2.27 includes a new feature that allows users to specify the default method for integrating changes from a remote repository into a local repository, without receiving a warning (this warning is informative, but can get annoying). To suppress this warning *for this repository only* we need to configure Git by running this line of code in the Terminal:
+
+```         
+git config pull.rebase false
+```
+
+`pull.rebase false` is a default strategy for pulling where Git will first try to auto-merge the files. If auto-merging is not possible, it will indicate a merge conflict.
+:::
 
 ------------------------------------------------------------------------
 
@@ -357,11 +357,11 @@ In order to contribute, the Collaborator must **clone** the repository from the 
 
 Let's bring a copy of this remote repository down to our local computer (aka **clone** this repository) so that we can work comfortably in RStudio.
 
-> ::: callout-tip
-> **An important distinction**
->
-> We refer to the **remote copy** of the repository that is on GitHub as the **origin repository** (the one that we cloned from), and the copy on our local computer as the **local repository**.
-> :::
+::: callout-note
+**An important distinction**
+
+We refer to the **remote copy** of the repository that is on GitHub as the **origin repository** (the one that we cloned from), and the copy on our local computer as the **local repository**.
+:::
 
 Start by clicking the green **Code** button (top right of your file listing) and copying the URL to your clipboard (this URL represents the repository location):
 
@@ -600,9 +600,9 @@ It is generally good practice to include all of your `library()` calls in a sing
 
 A great overview of this approach to reproducible papers comes from:
 
-> ::: callout-note
-> Ben Marwick, Carl Boettiger & Lincoln Mullen (2018) **Packaging Data Analytical Work Reproducibly Using R (and Friends)**, The American Statistician, 72:1, 80-88, [doi:10.1080/00031305.2017.1375986](https://doi.org/10.1080/00031305.2017.1375986)
-> :::
+::: callout-note
+Ben Marwick, Carl Boettiger & Lincoln Mullen (2018) **Packaging Data Analytical Work Reproducibly Using R (and Friends)**, The American Statistician, 72:1, 80-88, [doi:10.1080/00031305.2017.1375986](https://doi.org/10.1080/00031305.2017.1375986)
+:::
 
 The key idea in Marwick et al. (2018) is that of the *research compendium*: A single container for not just the journal article associated with your research but also the underlying analysis, data, and even the required software environment required to reproduce your work.
 
@@ -630,13 +630,13 @@ What if I want a template from another journal, different from the Journal of Ar
 
 ### **Workflow in a nutshell**
 
-> ::: callout-tip
-> **Summary**
->
-> -   Use `rrtools` to generate the core directory layout and approach to data handling.
->
-> -   Then use `rticles` to create the structure of the paper itself. The combination is incredibly flexible.
-> :::
+::: callout-important
+**Summary**
+
+-   Use `rrtools` to generate the core directory layout and approach to data handling.
+
+-   Then use `rticles` to create the structure of the paper itself. The combination is incredibly flexible.
+:::
 
 Things we can do with our research compendium:
 
@@ -737,7 +737,7 @@ Thank you for attending my TED Talk.
 
 ------------------------------------------------------------------------
 
-## **Additional Quarto Resources**
+## Additional Quarto Resources:
 
 -   Posit (the organization that developed Quarto) has great documentation, check out [Quarto.org](https://quarto.org/)
 
@@ -747,7 +747,7 @@ Thank you for attending my TED Talk.
 
 -   [Hello Quarto: share, collaborate, teach, reimagine](https://openscapes.org/blog/2022-08-10-quarto-keynote/). A talk by Julia Stewart Lowndes and Mine Cetinkaya-Runde.
 
-## **Git Resources**
+## Git Resources:
 
 -   [Pro Git Book](https://git-scm.com/book/en/v2)
 
@@ -761,7 +761,7 @@ Thank you for attending my TED Talk.
 
 Bitbucket’s tutorials on [Git Workflows](https://www.atlassian.com/git/tutorials/comparing-workflows)
 
-## Reproducible Research Resources
+## Reproducible Research Resources:
 
 -   [`rrtools` documentation](https://github.com/benmarwick/rrtools)
 
