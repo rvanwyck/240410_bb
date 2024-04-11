@@ -265,7 +265,7 @@ Most of our Git operations will be done in RStudio, but there are some situation
 Let’s start by adding your user name to the global options. Type the following into the command prompt, with your exact GitHub username, and press enter:
 
 ```         
-git config --global user.name "my_user_name"}
+git config --global user.name "my_user_name"
 ```
 
 Note that if the code ran successfully, it will look like nothing happened. We will check at the end to make sure it worked.
@@ -285,13 +285,13 @@ Next, we will set our credentials to not time out for a very long time. This is 
 You will not need to run the `git config` line below to set the cache. This is a specific configuration for the RStudio Server we are working on.
 
 ```         
-git config --global credential.helper 'cache --timeout=10000000'}
+git config --global credential.helper 'cache --timeout=10000000'
 ```
 
 Next, we will set the default branch name to `main` for any new repositories that are created moving forward. Why are we doing this? Previously, the default branch name was `master` and this racist terminology for Git branches motivates us to update our default branch to `main` instead.
 
 ```         
-git config --global init.defaultBranch main}
+git config --global init.defaultBranch main
 ```
 
 Finally, check to make sure everything looks correct by entering this command, which will return the global options you have set.

@@ -300,7 +300,7 @@ What should I write in my commit message?</strong></p>
 <section id="configuring-git" class="level2">
 <h2 class="anchored" data-anchor-id="configuring-git">Configuring Git</h2>
 <p>Let’s start by adding your user name to the global options. Type the following into the command prompt, with your exact GitHub username, and press enter:</p>
-<pre><code>git config --global user.name "my_user_name"}</code></pre>
+<pre><code>git config --global user.name "my_user_name"</code></pre>
 <p>Note that if the code ran successfully, it will look like nothing happened. We will check at the end to make sure it worked.</p>
 <p>Next, enter the following line, with the email address you used when you created your account on <a href="www.github.com">github.com</a>:</p>
 <pre><code>git config --global user.email "my_email@alaska.edu"</code></pre>
@@ -312,9 +312,9 @@ What should I write in my commit message?</strong></p>
 <section id="when-setting-up-git-and-github-on-your-personal-computer" class="level2">
 <h2 class="anchored" data-anchor-id="when-setting-up-git-and-github-on-your-personal-computer">When Setting up Git and GitHub on Your Personal Computer</h2>
 <p>You will not need to run the <code>git config</code> line below to set the cache. This is a specific configuration for the RStudio Server we are working on.</p>
-<pre><code>git config --global credential.helper 'cache --timeout=10000000'}</code></pre>
+<pre><code>git config --global credential.helper 'cache --timeout=10000000'</code></pre>
 <p>Next, we will set the default branch name to <code>main</code> for any new repositories that are created moving forward. Why are we doing this? Previously, the default branch name was <code>master</code> and this racist terminology for Git branches motivates us to update our default branch to <code>main</code> instead.</p>
-<pre><code>git config --global init.defaultBranch main}</code></pre>
+<pre><code>git config --global init.defaultBranch main</code></pre>
 <p>Finally, check to make sure everything looks correct by entering this command, which will return the global options you have set.</p>
 <pre><code>git config --global --list</code></pre>
 </section>
