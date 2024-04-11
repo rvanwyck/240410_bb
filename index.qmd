@@ -9,7 +9,7 @@ bibliography: references.bib
 
 ## Connecting GitHub to RStudio for Reproducible Research
 
-**Note:** Brown Bag attendees will learn more from my presentation if they 1) bring their laptop or follow along on Zoom, 2) have [RStudio](https://posit.co/download/rstudio-desktop/) loaded already to their machine, and 3) have a [GitHub](https://github.com/) account already. Make sure that Git is either installed on your system or the path to the Git executable is added to your system's PATH environment variable.
+**Note:** Brown Bag attendees will learn more from my presentation if they 1) bring their laptop or follow along on Zoom, 2) have [RStudio](https://posit.co/download/rstudio-desktop/) loaded already to their machine, and 3) make sure that Git is either installed on your machine and the path to the Git executable is added to your system's PATH environment variable.
 
 > **OBJECTIVES:**
 >
